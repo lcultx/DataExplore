@@ -1,0 +1,3 @@
+node-inspector &
+node --debug-brk backend/build/main.js &
+open http://localhost:8020

@@ -1,0 +1,22 @@
+{
+  "name": "data-explore",
+  "version": "1.0.0",
+  "description": "A way to explore your data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gastrodia/DataExplore.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gastrodia/DataExplore/issues"
+  },
+  "homepage": "https://github.com/gastrodia/DataExplore#readme",
+  "dependencies": {
+    "express": "^4.13.1"
+  }
+}
