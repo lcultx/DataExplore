@@ -19,6 +19,15 @@
         "!./node_modules/**/*.ts"
     ],
     "files": [
-        "./main.ts"
+        "./src/page_main.ts",
+        "./src/server/TitledArray2.ts",
+        "./src/server/config.ts",
+        "./src/server/main.ts",
+        "./typings/express/express.d.ts",
+        "./typings/interfaces.d.ts",
+        "./typings/mime/mime.d.ts",
+        "./typings/node/node.d.ts",
+        "./typings/serve-static/serve-static.d.ts",
+        "./typings/tsd.d.ts"
     ]
 }

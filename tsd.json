@@ -10,6 +10,12 @@
     },
     "node/node.d.ts": {
       "commit": "304a25197990aeabf8e9fd030ad927ed011b9e83"
+    },
+    "serve-static/serve-static.d.ts": {
+      "commit": "304a25197990aeabf8e9fd030ad927ed011b9e83"
+    },
+    "mime/mime.d.ts": {
+      "commit": "304a25197990aeabf8e9fd030ad927ed011b9e83"
     }
   }
 }

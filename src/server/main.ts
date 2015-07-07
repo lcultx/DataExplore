@@ -1,6 +1,3 @@
-/**
- * Created by xuyang on 15/7/7.
- */
  /// <reference path="../../typings/express/express.d.ts"/>
  /// <reference path="../../typings/node/node.d.ts"/>
 import  express = require('express');
@@ -9,8 +6,10 @@ import config = require('./config');
 
 var app = express();
 
-var fd_path = path.join(__dirname,'../../frontend');
-app.use(express.static(fd_path));
+var build_path = path.join(__dirname,'../../build');
+var resource_path = path.join(__dirname,'../../resource');
+app.use('build',express.static(build_path));
+app.use('resource',express.static(resource_path));
 
 var server = require('http').Server(app);
 server.listen(config.port,function(){
