@@ -20,8 +20,10 @@
     ],
     "files": [
         "./src/components/array2/Interfaces.ts",
-        "./src/components/collector/ICollector.ts",
+        "./src/components/collector/LogLineParser.ts",
         "./src/components/collector/RemoteLogDataCollector.ts",
+        "./src/components/collector/interfaces.d.ts",
+        "./src/components/collector/test.ts",
         "./src/components/shower/IShower.ts",
         "./src/index.ts",
         "./src/server/TitledArray2.ts",
@@ -30,6 +32,7 @@
         "./typings/express/express.d.ts",
         "./typings/mime/mime.d.ts",
         "./typings/node/node.d.ts",
+        "./typings/request/request.d.ts",
         "./typings/serve-static/serve-static.d.ts",
         "./typings/tsd.d.ts"
     ]
