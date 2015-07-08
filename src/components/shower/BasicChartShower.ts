@@ -14,6 +14,7 @@ class BasicChartShower implements IChartShower{
   $elem:JQuery;
   echarts = echarts;
   option:any;
+  myChart:any;
   constructor(viewContrainer:angular2.ViewContainerRef){
     this.parent = ng2Helper.getParentFromViewContainer(viewContrainer);
     this.$elem = ng2Helper.getJQueryElementFromViewContainer(viewContrainer);
@@ -26,12 +27,21 @@ class BasicChartShower implements IChartShower{
 
   drawChart(){
     if(this.option){
-      var targetElement = this.$elem.find('#canvas_content')[0];
-      var myChart = this.echarts.init(targetElement);
+
       // 为echarts对象加载数据
-      myChart.setOption(this.option);
+      this.getMyChart().setOption(this.option);
     }else{
       throw new Error('undefined chart option, you should call setChartOption method before drawChart');
+    }
+  }
+
+  getMyChart(){
+    if(this.myChart){
+      return this.myChart;
+    }else{
+      var targetElement = this.$elem.find('#canvas_content')[0];
+      this.myChart = this.echarts.init(targetElement);
+      return this.myChart;
     }
   }
 
