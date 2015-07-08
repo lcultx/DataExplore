@@ -11,7 +11,7 @@ export function getParentFromViewContainer(viewContainer:angular2.ViewContainerR
 
 export function getJQueryElementFromViewContainer(viewContainer:angular2.ViewContainerRef){
     var ngElement =viewContainer.element;
-    var domElement:HTMLElement = (<any>ngElement).domElement;
+    var domElement:HTMLElement = (<any>ngElement).nativeElement;
     var $elem = $(domElement);
     return $elem;
 }
