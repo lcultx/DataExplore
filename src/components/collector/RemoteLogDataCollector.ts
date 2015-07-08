@@ -2,7 +2,7 @@
 import events = require('events');
 /// <reference path="../../../typings/request/request.d.ts"/>
 import http = require('http');
-
+ 
 
 function readLines(input, func) {
   var remaining = '';

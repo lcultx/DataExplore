@@ -3,3 +3,4 @@
 /// <reference path="serve-static/serve-static.d.ts" />
 /// <reference path="mime/mime.d.ts" />
 /// <reference path="request/request.d.ts" />
+/// <reference path="jquery/jquery.d.ts" />

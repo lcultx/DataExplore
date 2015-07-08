@@ -1,6 +1,10 @@
 //数据展示器
-interface DataShower{
+interface IShower{
   show();
   hide();
   update();
+}
+
+interface ILogShower{
+
 }

@@ -1,6 +1,6 @@
 /// <reference path="./interfaces.d.ts"/>
 //日志解析器
-class LogLineParser implements ILogParser{
+class LogLineParser implements ILogParser{ 
 
   //[2015-07-06 23:59:59.758] [INFO] active - 卸下装备 /equip/upgrade?partnerIndex=0&index=2&_time=1436198398545&version=v0.0.6&sessionId=a7AB0hWxRBQJKQm4L4QplE9E 1436198399758 5111 588 丑的别致. 533054 1180
 
