@@ -12,7 +12,7 @@
 // Angular depends transitively on these libraries.
 // If you don't have them installed you can run
 // $ tsd query es6-promise rx rx-lite --action install --save
-///<reference path="../es6-promise/es6-promise.d.ts"/>
+///<reference path="../es6-promise/es6-promise.d.ts"/> 
 ///<reference path="../rx/rx.d.ts"/>
 
 interface List<T> extends Array<T> {}
@@ -6157,6 +6157,3 @@ declare module "angular2/angular2" {
   }
 
 }
-
-
-
