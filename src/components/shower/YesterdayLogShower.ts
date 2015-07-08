@@ -18,7 +18,7 @@ class YesterdayLogShower {
   parent:Application;
   constructor(viewContrainer:angular2.ViewContainerRef){
     this.parent = ng2Helper.getParentFromViewContainer(viewContrainer);
-    console.log(this.parent);
+    this.parent.addShower(this);
   }
 }
 
