@@ -19,12 +19,15 @@
         "!./node_modules/**/*.ts"
     ],
     "files": [
-        "./src/page_main.ts",
+        "./src/components/array2/Interfaces.ts",
+        "./src/components/collector/ICollector.ts",
+        "./src/components/collector/RemoteLogDataCollector.ts",
+        "./src/components/shower/IShower.ts",
+        "./src/index.ts",
         "./src/server/TitledArray2.ts",
         "./src/server/config.ts",
         "./src/server/main.ts",
         "./typings/express/express.d.ts",
-        "./typings/interfaces.d.ts",
         "./typings/mime/mime.d.ts",
         "./typings/node/node.d.ts",
         "./typings/serve-static/serve-static.d.ts",

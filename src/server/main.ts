@@ -6,10 +6,10 @@ import config = require('./config');
 
 var app = express();
 
-var build_path = path.join(__dirname,'../../build');
-var resource_path = path.join(__dirname,'../../resource');
-app.use('build',express.static(build_path));
-app.use('resource',express.static(resource_path));
+var web_path = path.join(__dirname,'../../');
+console.log(web_path);
+app.use(express.static(web_path));
+
 
 var server = require('http').Server(app);
 server.listen(config.port,function(){
