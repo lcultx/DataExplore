@@ -11,7 +11,6 @@
         "suppressImplicitAnyIndexErrors": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "sourceMap": true,
         "outDir": "./build"
     },
     "filesGlob": [
@@ -24,7 +23,9 @@
         "./src/components/collector/RemoteLogDataCollector.ts",
         "./src/components/collector/interfaces.d.ts",
         "./src/components/collector/test.ts",
+        "./src/components/shower/BasicChartShower.ts",
         "./src/components/shower/OneDayLogShower.ts",
+        "./src/components/shower/YesterdayEventShower.ts",
         "./src/components/shower/YesterdayLogShower.ts",
         "./src/components/shower/interfaces.d.ts",
         "./src/index.ts",

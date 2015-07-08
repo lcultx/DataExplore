@@ -5,6 +5,7 @@
 import {Component, Directive, View, Parent} from 'angular2/angular2';
 import ng2Helper = require('../../library/ng2Helper');
 import YesterdayLogShower = require('../shower/YesterdayLogShower');
+import YesterdayEventShower = require('../shower/YesterdayEventShower');
 
 @Component({
   selector: 'application'
@@ -12,7 +13,7 @@ import YesterdayLogShower = require('../shower/YesterdayLogShower');
 
 @View({
   templateUrl: ng2Helper.getTemplateUrlByComponentName('application'),
-  directives: [YesterdayLogShower]
+  directives: [YesterdayLogShower,YesterdayEventShower]
 })
 
 class Application {

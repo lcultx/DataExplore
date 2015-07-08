@@ -8,3 +8,8 @@ interface IShower{
 interface ILogShower extends IShower{
 
 }
+
+interface IChartShower extends IShower{
+  setChartOption(option:any);
+  drawChart();
+}

@@ -4,39 +4,25 @@ import ng2Helper = require('../../library/ng2Helper');
 
 import {Component, Directive, View, Parent} from 'angular2/angular2';
 import angular2 = require('angular2/angular2');
-import Application = require('../application/Application');
 
-        var ec = require('echarts').echarts;
-
+import BasicChartShower = require('./BasicChartShower');
 
 @Component({
   selector: 'yesterday-log-shower'
 })
 
 @View({
-  templateUrl: ng2Helper.getTemplateUrlByComponentPath('shower/yesterday-log-shower'),
+  templateUrl: ng2Helper.getTemplateUrlByComponentPath('shower/log-shower'),
 })
 
-class YesterdayLogShower implements ILogShower{
-  parent:Application;
-  $elem:JQuery;
+
+
+class YesterdayLogShower extends BasicChartShower implements ILogShower{
+
   constructor(viewContrainer:angular2.ViewContainerRef){
-    this.parent = ng2Helper.getParentFromViewContainer(viewContrainer);
-    this.$elem = ng2Helper.getJQueryElementFromViewContainer(viewContrainer);
-    this.parent.addShower(this);
 
-
-
-    this.drawChart();
-
-  }
-
-  drawChart(){
-
-    var targetElement = this.$elem.find('#canvas_content')[0];
-    
-    var myChart = ec.init(targetElement);
-    var option = {
+    super(viewContrainer);
+    this.option = {
        title : {
            text: '某楼盘销售情况',
            subtext: '纯属虚构'
@@ -93,24 +79,11 @@ class YesterdayLogShower implements ILogShower{
                data:[1320, 1132, 601, 234, 120, 90, 20]
            }
        ]
-    };
-
-
-    // 为echarts对象加载数据
-    myChart.setOption(option);
-
   }
 
+  this.drawChart();
+}
 
-  show(){
-    this.$elem.hide();
-  };
-  hide(){
-    this.$elem.show();
-  };
-  update(){
-
-  };
 }
 
 export = YesterdayLogShower;
