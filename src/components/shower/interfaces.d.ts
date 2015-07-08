@@ -5,6 +5,6 @@ interface IShower{
   update();
 }
 
-interface ILogShower{
+interface ILogShower extends IShower{
 
 }

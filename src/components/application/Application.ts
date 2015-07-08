@@ -16,7 +16,7 @@ import YesterdayLogShower = require('../shower/YesterdayLogShower');
 })
 
 class Application {
-  showerList:Array<ILogShower>;
+  showerList:Array<ILogShower> = [];
   addShower(shower:ILogShower){
     this.showerList.push(shower);
   };
