@@ -47,4 +47,15 @@ class LatteEventLogModel extends  baseEventLogModel implements IEventLogModel{
       return null;
     }
   }
+
+  getEventHour():number{
+    var time = this.ob.time;
+    return time.split(':')[0]*1;
+  }
+
+  getEventName():string{
+    return this.ob.player_action;
+  }
 }
+
+export =LatteEventLogModel;

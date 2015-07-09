@@ -4,7 +4,7 @@ import events = require('events');
 import http = require('http');
 
 
-function readLines(input, func) { 
+function readLines(input, func) {
   var remaining = '';
 
   input.on('data', function(data) {
@@ -45,6 +45,15 @@ class RemoteLogDataCollector extends events.EventEmitter implements ILogCollecto
   setParser(parser:ILogParser){
     this.parser = parser;
   }
+
+  setLogModelAsParser(model:IEventLogModel){
+    class Parser implements ILogParser{
+      parse(line){
+        return model.parseLogLine(line);
+      }
+    }
+    this.parser = new Parser();
+  };
 
   run(){
     var count = 0;

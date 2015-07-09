@@ -9,7 +9,7 @@ import StreamHelper = require('./StreamHelper');
 class LocalLogDataCollector extends events.EventEmitter implements ILogCollector{
   //远程日志地址
   file:string;
-  parser:ILogParser; 
+  parser:ILogParser;
 
   constructor(url?:string){
     super();
@@ -25,6 +25,15 @@ class LocalLogDataCollector extends events.EventEmitter implements ILogCollector
   setParser(parser:ILogParser){
     this.parser = parser;
   }
+
+  setLogModelAsParser(model:IEventLogModel){
+    class Parser implements ILogParser{
+      parse(line){
+        return model.parseLogLine(line);
+      }
+    }
+    this.parser = new Parser();
+  };
 
   run(){
     var count = 0;
