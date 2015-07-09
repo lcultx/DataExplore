@@ -1,6 +1,6 @@
 /// <reference path="./interfaces.d.ts"/>
 
-import BasicChartShower = require('./BasicChartShower');
+import baseChartShower = require('./baseChartShower');
 import {Component, Directive, View, Parent} from 'angular2/angular2';
 import angular2 = require('angular2/angular2');
 import ng2Helper = require('../../library/ng2Helper');
@@ -18,7 +18,7 @@ import ng2Helper = require('../../library/ng2Helper');
 })
 
 
-class YesterdayEventShower extends BasicChartShower implements IChartShower{
+class YesterdayEventShower extends baseChartShower implements IChartShower{
 
 
 
@@ -52,7 +52,7 @@ class YesterdayEventShower extends BasicChartShower implements IChartShower{
               dataView : {show: true, readOnly: false},
               magicType : {
                   show: true,
-                  type: ['pie', 'funnel']
+                  type: ['pie']
               },
               restore : {show: true},
               saveAsImage : {show: true}
@@ -133,7 +133,7 @@ class YesterdayEventShower extends BasicChartShower implements IChartShower{
 
           this.option.legend.y = marginTop;
         }
-      
+
 
         var pie = {
             name:(i+1) + '点',
@@ -141,8 +141,8 @@ class YesterdayEventShower extends BasicChartShower implements IChartShower{
             radius : [5, radius],
             center : [point_x, point_y],
             roseType : 'radius',
-            //width: '40%',       // for funnel
-            //max: 40,            // for funnel
+            width: '5%',       // for funnel
+            max: 40,            // for funnel
             itemStyle : {
                 normal : {
                     label : {

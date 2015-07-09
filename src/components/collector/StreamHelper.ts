@@ -11,7 +11,7 @@ export function readLines(input, func) {
       func(line);
       index = remaining.indexOf('\n');
     }
-  });
+  }); 
 
   input.on('end', function() {
     console.log('on end !!!!!!!!!!!!!!!');

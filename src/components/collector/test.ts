@@ -11,7 +11,7 @@ var logUrl = 'http://121.201.8.151:8888/gm/getActiveLog?path=/server1/2015/07/06
 // ldCollector.on('line',function(ob){
 //   console.log(ob);
 // });
-
+ 
  var logPath = '/Users/xuyang/src/DataExplore/resource/getActiveLog';
  var ldCollector:ILogCollector = new LocalLogDataCollector();
  var logParser:ILogParser = new LogLineParser();

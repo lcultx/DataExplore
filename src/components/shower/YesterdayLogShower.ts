@@ -5,7 +5,7 @@ import ng2Helper = require('../../library/ng2Helper');
 import {Component, Directive, View, Parent} from 'angular2/angular2';
 import angular2 = require('angular2/angular2');
 
-import BasicChartShower = require('./BasicChartShower');
+import baseChartShower = require('./baseChartShower');
 
 @Component({
   selector: 'yesterday-log-shower'
@@ -17,7 +17,7 @@ import BasicChartShower = require('./BasicChartShower');
 
 
 
-class YesterdayLogShower extends BasicChartShower implements ILogShower{
+class YesterdayLogShower extends baseChartShower implements ILogShower{
 
   constructor(viewContrainer:angular2.ViewContainerRef){
 

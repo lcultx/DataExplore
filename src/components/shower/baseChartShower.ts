@@ -9,7 +9,7 @@ import Application = require('../application/Application');
 var echarts = require('echarts').echarts;
 
 
-class BasicChartShower implements IChartShower{
+class baseChartShower implements IChartShower{
   parent:Application;
   $elem:JQuery;
   echarts = echarts;
@@ -61,4 +61,4 @@ class BasicChartShower implements IChartShower{
   };
 }
 
-export =  BasicChartShower ;
+export =  baseChartShower ;

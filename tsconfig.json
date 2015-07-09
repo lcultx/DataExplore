@@ -19,24 +19,28 @@
     ],
     "files": [
         "./src/components/application/Application.ts",
-        "./src/components/array2/Interfaces.ts",
         "./src/components/collector/LocalLogDataCollector.ts",
-        "./src/components/collector/LogLineParser.ts",
         "./src/components/collector/RemoteLogDataCollector.ts",
         "./src/components/collector/StreamHelper.ts",
         "./src/components/collector/interfaces.d.ts",
         "./src/components/collector/test.ts",
-        "./src/components/shower/BasicChartShower.ts",
+        "./src/components/data-models/LatteEventLogModel.ts",
+        "./src/components/data-models/baseEventLogModel.ts",
+        "./src/components/data-models/interfaces.d.ts",
         "./src/components/shower/OneDayLogShower.ts",
         "./src/components/shower/YesterdayEventShower.ts",
         "./src/components/shower/YesterdayLogShower.ts",
+        "./src/components/shower/baseChartShower.ts",
         "./src/components/shower/interfaces.d.ts",
         "./src/index.ts",
+        "./src/library/mogHelper.ts",
         "./src/library/ng2Helper.ts",
         "./src/server/TitledArray2.ts",
         "./src/server/config.ts",
         "./src/server/main.ts",
         "./src/server/router/get_yesterday_all_server_logging.ts",
-        "./src/server/router/get_yesterday_events.ts"
+        "./src/server/router/get_yesterday_events.ts",
+        "./src/server/tasks/RemoteLog2Local.ts",
+        "./src/server/tasks/interface.d.ts"
     ]
 }

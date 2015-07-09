@@ -4,7 +4,7 @@ import events = require('events');
 import http = require('http');
 
 
-function readLines(input, func) {
+function readLines(input, func) { 
   var remaining = '';
 
   input.on('data', function(data) {
