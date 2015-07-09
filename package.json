@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/gastrodia/DataExplore#readme",
   "dependencies": {
+    "exec-time": "0.0.3",
     "express": "^4.13.1",
     "request": "^2.58.0"
   }

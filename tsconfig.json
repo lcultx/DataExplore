@@ -20,8 +20,10 @@
     "files": [
         "./src/components/application/Application.ts",
         "./src/components/array2/Interfaces.ts",
+        "./src/components/collector/LocalLogDataCollector.ts",
         "./src/components/collector/LogLineParser.ts",
         "./src/components/collector/RemoteLogDataCollector.ts",
+        "./src/components/collector/StreamHelper.ts",
         "./src/components/collector/interfaces.d.ts",
         "./src/components/collector/test.ts",
         "./src/components/shower/BasicChartShower.ts",
@@ -34,6 +36,7 @@
         "./src/server/TitledArray2.ts",
         "./src/server/config.ts",
         "./src/server/main.ts",
-        "./src/server/router/get_yesterday_all_server_logging.ts"
+        "./src/server/router/get_yesterday_all_server_logging.ts",
+        "./src/server/router/get_yesterday_events.ts"
     ]
 }

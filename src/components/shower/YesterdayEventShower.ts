@@ -28,44 +28,121 @@ class YesterdayEventShower extends BasicChartShower implements IChartShower{
 
     super(viewContrainer);
 
+
+
     this.option = {
-    title : {
-        text: '南丁格尔玫瑰图',
-        subtext: '纯属虚构',
-        x:'center'
-    },
-    tooltip : {
-        trigger: 'item',
-        formatter: "{a} <br/>{b} : {c} ({d}%)"
-    },
-    legend: {
-        x : 'center',
-        y : 'bottom',
-        data:['rose1','rose2','rose3','rose4','rose5','rose6','rose7','rose8']
-    },
-    toolbox: {
-        show : true,
-        feature : {
-            mark : {show: true},
-            dataView : {show: true, readOnly: false},
-            magicType : {
-                show: true,
-                type: ['pie', 'funnel']
-            },
-            restore : {show: true},
-            saveAsImage : {show: true}
+      title : {
+          text: '2015/07/06 全服玩家单日行为汇总',
+          subtext: '',
+          x:'left'
+      },
+      tooltip : {
+          trigger: 'item',
+          formatter: "{a} <br/>{b} : {c} ({d}%)"
+      },
+      legend: {
+          x : 'left',
+          y : 'bottom',
+          data:['rose1','rose2','rose3','rose4','rose5','rose6','rose7','rose8']
+      },
+      toolbox: {
+          show : true,
+          feature : {
+              mark : {show: true},
+              dataView : {show: true, readOnly: false},
+              magicType : {
+                  show: true,
+                  type: ['pie', 'funnel']
+              },
+              restore : {show: true},
+              saveAsImage : {show: true}
+          }
+      },
+      calculable : true,
+      series : []
+    };
+
+
+    function totalNumber(ob){
+      var total = 0;
+      for(var i in ob){
+        total += ob[i];
+      }
+      return total;
+    }
+
+    function getKeyNameArray(data){
+      var keyArray = [];
+      for(var i=0;i<data.length;i++){
+        for(var key in data[i]){
+          if(keyArray.indexOf(key) == -1){
+            keyArray.push(key);
+          }
         }
-    },
-    calculable : true,
-    series : [
-        {
-            name:'半径模式',
+      }
+      return keyArray;
+    }
+    $.get('/yesterday_events',(data)=>{
+      console.log(data);
+      var chartCanvasHeight = 200;
+      var numberArray:Array<number> = [];
+      var keyArray = getKeyNameArray(data);
+      console.log(keyArray);
+      this.option.legend.data = keyArray;
+      var totalTotal = 0;
+      for(var i=0;i<data.length;i++){
+        var this_total = totalNumber(data[i]);
+        totalTotal += this_total;
+        numberArray.push(this_total);
+      }
+      console.log(numberArray);
+      console.log(totalTotal);
+
+
+      var totalWidth = window.innerWidth;
+      var marginLeft = 0;
+      var marginTop = 100;
+
+      var lineCharNumber = 12;
+
+      var cubeLength = Math.round(totalWidth/lineCharNumber);
+      var maxValue = Math.max.apply(null,numberArray);
+      var maxRadius = Math.round(((maxValue/totalTotal)/2) * totalWidth);
+
+      console.log(Math.max.apply(null,numberArray));
+
+
+      var count = 0;
+
+      for(var i=0;i<data.length;i++){
+        count ++;
+
+        var radius = Math.round((numberArray[i]/totalTotal)*totalWidth);
+        var point_x = marginLeft + cubeLength/2;
+        var point_y = marginTop + cubeLength/2;
+
+
+        console.log('point_y',point_y);
+        marginLeft += cubeLength;
+
+        if(count == lineCharNumber){
+          marginLeft = 0;
+          marginTop = marginTop + cubeLength + 100;
+          count = 0;
+          chartCanvasHeight += cubeLength + 100;
+
+          this.option.legend.y = marginTop;
+        }
+      
+
+        var pie = {
+            name:(i+1) + '点',
             type:'pie',
-            radius : [20, 110],
-            center : ['25%', 200],
+            radius : [5, radius],
+            center : [point_x, point_y],
             roseType : 'radius',
-            width: '40%',       // for funnel
-            max: 40,            // for funnel
+            //width: '40%',       // for funnel
+            //max: 40,            // for funnel
             itemStyle : {
                 normal : {
                     label : {
@@ -84,117 +161,28 @@ class YesterdayEventShower extends BasicChartShower implements IChartShower{
                     }
                 }
             },
-            data:[
-                {value:10, name:'rose1'},
-                {value:5, name:'rose2'},
-                {value:15, name:'rose3'},
-                {value:25, name:'rose4'},
-                {value:20, name:'rose5'},
-                {value:35, name:'rose6'},
-                {value:30, name:'rose7'},
-                {value:40, name:'rose8'}
-            ]
-        },
-
-        {
-            name:'半径模式',
-            type:'pie',
-            radius : [20, 210],
-            center : ['50%', 200],
-            roseType : 'radius',
-            width: '40%',       // for funnel
-            max: 40,            // for funnel
-            itemStyle : {
-                normal : {
-                    label : {
-                        show : false
-                    },
-                    labelLine : {
-                        show : false
-                    }
-                },
-                emphasis : {
-                    label : {
-                        show : true
-                    },
-                    labelLine : {
-                        show : true
-                    }
-                }
-            },
-            data:[
-                {value:110, name:'rose1'},
-                {value:5, name:'rose2'},
-                {value:15, name:'rose3'},
-                {value:25, name:'rose4'},
-                {value:20, name:'rose5'},
-                {value:35, name:'rose6'},
-                {value:30, name:'rose7'},
-                {value:40, name:'rose8'}
-            ]
-        },
-
-        // {
-        //     name:'半径模式',
-        //     type:'pie',
-        //     radius : [20, 110],
-        //     center : ['75%', 200],
-        //     roseType : 'radius',
-        //     width: '40%',       // for funnel
-        //     max: 40,            // for funnel
-        //     itemStyle : {
-        //         normal : {
-        //             label : {
-        //                 show : false
-        //             },
-        //             labelLine : {
-        //                 show : false
-        //             }
-        //         },
-        //         emphasis : {
-        //             label : {
-        //                 show : true
-        //             },
-        //             labelLine : {
-        //                 show : true
-        //             }
-        //         }
-        //     },
-        //     data:[
-        //         {value:10, name:'rose1'},
-        //         {value:5, name:'rose2'},
-        //         {value:15, name:'rose3'},
-        //         {value:25, name:'rose4'},
-        //         {value:20, name:'rose5'},
-        //         {value:35, name:'rose6'},
-        //         {value:30, name:'rose7'},
-        //         {value:40, name:'rose8'}
-        //     ]
-        // },
-        {
-            name:'面积模式',
-            type:'pie',
-            radius : [30, 110],
-            center : ['75%', 200],
-            roseType : 'area',
-            x: '50%',               // for funnel
-            max: 40,                // for funnel
-            sort : 'ascending',     // for funnel
-            data:[
-                {value:10, name:'rose1'},
-                {value:5, name:'rose2'},
-                {value:15, name:'rose3'},
-                {value:25, name:'rose4'},
-                {value:20, name:'rose5'},
-                {value:35, name:'rose6'},
-                {value:30, name:'rose7'},
-                {value:40, name:'rose8'}
-            ]
+            data:[]
         }
-    ]
-};
+        var this_data = data[i];
+        for(var key in this_data){
+          pie.data.push({
+            name:key,
+            value:this_data[key]
+          });
+        }
 
-    this.drawChart();
+        this.option.series.push(pie);
+        }
+
+        this.drawChart();
+
+
+
+    })
+
+
+
+
 
   }
 

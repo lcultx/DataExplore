@@ -2,7 +2,7 @@
 import events = require('events');
 /// <reference path="../../../typings/request/request.d.ts"/>
 import http = require('http');
- 
+
 
 function readLines(input, func) {
   var remaining = '';
@@ -20,7 +20,7 @@ function readLines(input, func) {
 
   input.on('end', function() {
     if (remaining.length > 0) {
-      func(remaining);
+      func(remaining,true);
     }
   });
 }
@@ -38,7 +38,7 @@ class RemoteLogDataCollector extends events.EventEmitter implements ILogCollecto
     }
   }
 
-  setLogUrl(url:string){
+  setLogURI(url:string){
     this.url = url;
   }
 
@@ -52,12 +52,16 @@ class RemoteLogDataCollector extends events.EventEmitter implements ILogCollecto
       console.log('STATUS: ' + res.statusCode);
       console.log('HEADERS: ' + JSON.stringify(res.headers));
       res.setEncoding('utf8');
-      readLines(res,(line)=>{
+      readLines(res,(line,end)=>{
         console.log('count',count++);
         //console.log(line);
         var ob = this.parser.parse(line);
         //console.log(ob);
-        this.emit('line',ob);
+        if(end){
+          this.emit('end',ob);
+        }else{
+          this.emit('line',ob);
+        }
       });
       // res.on('data', function (chunk) {
       //   console.log('count',count++);

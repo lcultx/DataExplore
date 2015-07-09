@@ -26,6 +26,7 @@ class BasicChartShower implements IChartShower{
   }
 
   drawChart(){
+
     if(this.option){
 
       // 为echarts对象加载数据
@@ -43,6 +44,9 @@ class BasicChartShower implements IChartShower{
       this.myChart = this.echarts.init(targetElement);
       return this.myChart;
     }
+
+
+
   }
 
 
