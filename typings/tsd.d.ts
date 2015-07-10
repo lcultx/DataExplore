@@ -4,3 +4,6 @@
 /// <reference path="mime/mime.d.ts" />
 /// <reference path="request/request.d.ts" />
 /// <reference path="jquery/jquery.d.ts" />
+/// <reference path="moment/moment.d.ts" />
+/// <reference path="moment/moment-node.d.ts" />
+/// <reference path="later/later.d.ts" />

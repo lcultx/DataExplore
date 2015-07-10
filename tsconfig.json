@@ -40,7 +40,8 @@
         "./src/server/main.ts",
         "./src/server/router/get_yesterday_all_server_logging.ts",
         "./src/server/router/get_yesterday_events.ts",
-        "./src/server/tasks/RemoteLog2Local.ts",
+        "./src/server/tasks/Downloader.ts",
+        "./src/server/tasks/QZoneLatteLogs2Local.ts",
         "./src/server/tasks/interface.d.ts"
     ]
 }
