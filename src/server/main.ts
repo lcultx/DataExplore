@@ -17,6 +17,6 @@ server.listen(config.port,function(){
   console.log('data-explore server is listening on port ' + config.port);
 });
 
-var QzoneLatteLogs2Local = require('./tasks/QzoneLatteLogs2Local');
-var qZoneLogs2Local = new QzoneLatteLogs2Local();
-qZoneLogs2Local.run();
+
+var tasks = require('./tasks');
+tasks.run();

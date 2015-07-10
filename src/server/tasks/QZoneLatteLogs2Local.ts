@@ -2,32 +2,27 @@
 /// <reference path="../../../typings/node/node.d.ts"/>
 /// <reference path="../../../typings/moment/moment.d.ts"/>
 /// <reference path="../../../typings/later/later.d.ts"/>
-import Moment = require('moment');
+import moment = require('moment');
 import later = require('later');
 import Downloader = require('./Downloader');
 import path = require('path');
 import config = require('../config');
 
-class QZoneLatteLogs2Local implements ITask{
+class QZoneLatteLogs2Local implements IDailyLogs2Local{
   run(){
 
-    //每天4:45取得前一天的日志
-    var sched = later.parse.text('at 4:45am every day');
-    //var manualSched = <Later.IScheduleData>{ schedules: [ <Later.IRecurrence>{ M: [ 3 ], D: [ 21 ] } ] };
-
-    console.log('管理员校对服务器时间...');
-    var laterTime = later.date.localTime();
-    console.log("Now:"+new Date());
-    console.log("Later Time:" + laterTime);
-
-    // later.setInterval(()=>{
-    //   this.download();
-    // },sched);
-
-    this.download();
+    var sched = later.parse.text('at 4:35am every day');
+    later.setInterval(()=>{
+      this.download(moment().subtract(1, 'days'));
+    },sched);
   }
 
-  download(){
+  static getInstance(){
+    return new QZoneLatteLogs2Local();
+  }
+
+
+  download(theday:moment.Moment){
     var servers = [
       'http://121.201.8.151:8888/gm/getActiveLog?path=/server1',
       'http://121.201.8.151:8788/gm/getActiveLog?path=/server2',
@@ -39,16 +34,13 @@ class QZoneLatteLogs2Local implements ITask{
 
     config.getQZoneLatteLogsDir()
 
-    var yesterday = Moment().subtract(1, 'days');
-    var url =  '/' +   yesterday.format('YYYY/MM/DD') + '.log';
+    var url =  '/' +   theday.format('YYYY/MM/DD') + '.log';
 
     for(var i=0;i<servers.length;i++){
       var remote_url =  servers[i] + url;
-      var local_path = path.join(config.getQZoneLatteLogsDir(),yesterday.format('YYYY/MM/DD')
+      var local_path = path.join(config.getQZoneLatteLogsDir(),theday.format('YYYY/MM/DD')
        + '/' + servers[i].split('path=/')[1] + '.log');
-      Downloader.download(remote_url,local_path,(status)=>{
-
-      })
+      Downloader.download(remote_url,local_path,(status)=>{});
     }
 
   }

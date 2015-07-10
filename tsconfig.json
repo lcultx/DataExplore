@@ -42,6 +42,8 @@
         "./src/server/router/get_yesterday_events.ts",
         "./src/server/tasks/Downloader.ts",
         "./src/server/tasks/QZoneLatteLogs2Local.ts",
+        "./src/server/tasks/WanbaSDKLogs2Local.ts",
+        "./src/server/tasks/index.ts",
         "./src/server/tasks/interface.d.ts"
     ]
 }
