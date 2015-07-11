@@ -7,16 +7,14 @@ import later = require('later');
 import Downloader = require('./Downloader');
 import path = require('path');
 import config = require('../config');
-
+import fs = require('fs');
 class WanbaSDKLogs2Local implements IDailyLogs2Local{
   run(){
-
-
-    var sched = later.parse.text('at 4:45am every day');
-    //var manualSched = <Later.IScheduleData>{ schedules: [ <Later.IRecurrence>{ M: [ 3 ], D: [ 21 ] } ] };
+    later.date.localTime();
+    var sched = <Later.IScheduleData>{ schedules: [ <Later.IRecurrence>{ h: [ 4 ], m: [ 35 ] } ] };
     later.setInterval(()=>{
       this.download( moment().subtract(1, 'days'));
-    },sched);
+  },sched);
   }
 
   static getInstance(){
@@ -24,11 +22,19 @@ class WanbaSDKLogs2Local implements IDailyLogs2Local{
   }
 
   download(theday:moment.Moment){
-    var theday_log_path  = path.join(config.getWanbaSDKLogsDir(),theday.format('YYYY/MM/DD'));
-    Downloader.download('http://119.29.72.23:3000/info.log.0',path.join(theday_log_path,'info.log'),()=>{});
-    Downloader.download('http://119.29.72.23:3000/warn.log.0',path.join(theday_log_path,'warn.log'),()=>{});
-    Downloader.download('http://119.29.72.23:3000/error.log.0',path.join(theday_log_path,'error.log'),()=>{});
+    var log_dir = this.getLogsDir(theday);
+    Downloader.download('http://119.29.72.23:3000/info.log.0',path.join(log_dir,'info.log'),()=>{});
+    Downloader.download('http://119.29.72.23:3000/warn.log.0',path.join(log_dir,'warn.log'),()=>{});
+    Downloader.download('http://119.29.72.23:3000/error.log.0',path.join(log_dir,'error.log'),()=>{});
   }
+
+  getLogsDir(theday:moment.Moment):string{
+    return path.join(config.getWanbaSDKLogsDir(),theday.format('YYYY/MM/DD'));
+  }
+
+  exist(theday:moment.Moment){
+    return fs.existsSync(this.getLogsDir(theday));
+  };
 }
 
 export = WanbaSDKLogs2Local

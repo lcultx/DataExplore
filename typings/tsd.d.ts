@@ -7,3 +7,4 @@
 /// <reference path="moment/moment.d.ts" />
 /// <reference path="moment/moment-node.d.ts" />
 /// <reference path="later/later.d.ts" />
+/// <reference path="async/async.d.ts" />

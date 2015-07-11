@@ -7,13 +7,17 @@ import later = require('later');
 import Downloader = require('./Downloader');
 import path = require('path');
 import config = require('../config');
+import fs = require('fs');
+
 
 class QZoneLatteLogs2Local implements IDailyLogs2Local{
-  run(){
 
-    var sched = later.parse.text('at 4:35am every day');
+  run(){
+    later.date.localTime();
+    var sched = <Later.IScheduleData>{ schedules: [ <Later.IRecurrence>{ h: [ 3 ], m: [ 35 ] } ] };
     later.setInterval(()=>{
       this.download(moment().subtract(1, 'days'));
+      require('./history_logs_track');
     },sched);
   }
 
@@ -38,12 +42,18 @@ class QZoneLatteLogs2Local implements IDailyLogs2Local{
 
     for(var i=0;i<servers.length;i++){
       var remote_url =  servers[i] + url;
-      var local_path = path.join(config.getQZoneLatteLogsDir(),theday.format('YYYY/MM/DD')
-       + '/' + servers[i].split('path=/')[1] + '.log');
+      var local_path = path.join(this.getLogsDir(theday) ,'/' + servers[i].split('path=/')[1] + '.log');
       Downloader.download(remote_url,local_path,(status)=>{});
     }
-
   }
+
+  getLogsDir(theday:moment.Moment):string{
+    return path.join(config.getQZoneLatteLogsDir(),theday.format('YYYY/MM/DD'));
+  }
+
+  exist(theday:moment.Moment){
+    return fs.existsSync(this.getLogsDir(theday));
+  };
 }
 
 export = QZoneLatteLogs2Local;
