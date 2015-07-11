@@ -18,7 +18,7 @@ class QZoneLatteLogs2Local implements IDailyLogs2Local{
     later.setInterval(()=>{
       this.download(moment().subtract(1, 'days'));
       require('./history_logs_track');
-    },sched);
+    },sched); 
   }
 
   static getInstance(){
