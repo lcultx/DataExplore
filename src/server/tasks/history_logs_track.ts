@@ -11,9 +11,9 @@ export function run(){
     var theday = moment().subtract(1, 'days');
   var t = setInterval(()=>{
     theday = theday.subtract(1,'day');
-    var wanbaLogs = WanbaSDKLogs2Local.getInstance();
-    if(!wanbaLogs.exist(theday)){
-      wanbaLogs.download(theday);
+    var qLogs = QzoneLatteLogs2Local.getInstance();
+    if(!qLogs.exist(theday)){
+      qLogs.download(theday);
       console.log('downlading logs of' + theday);
     }
   },1000*60*5)
