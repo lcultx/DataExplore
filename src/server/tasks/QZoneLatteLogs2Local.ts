@@ -17,8 +17,7 @@ class QZoneLatteLogs2Local implements IDailyLogs2Local{
     var sched = <Later.IScheduleData>{ schedules: [ <Later.IRecurrence>{ h: [ 3 ], m: [ 35 ] } ] };
     later.setInterval(()=>{
       this.download(moment().subtract(1, 'days'));
-      require('./history_logs_track');
-    },sched); 
+    },sched);
   }
 
   static getInstance(){
