@@ -19,13 +19,17 @@ var baseChartShower = require('./baseChartShower');
 var angular2_1 = require('angular2/angular2');
 var angular2 = require('angular2/angular2');
 var ng2Helper = require('../../library/ng2Helper');
-var PayPointShower = (function (_super) {
-    __extends(PayPointShower, _super);
-    function PayPointShower(viewContrainer) {
+var GenderPayContrast = (function (_super) {
+    __extends(GenderPayContrast, _super);
+    function GenderPayContrast(viewContrainer) {
+        var _this = this;
         _super.call(this, viewContrainer);
-        this.option = {};
+        $.get('/gender_pay_contrast', function (data) {
+            _this.option = data;
+            _this.drawChart();
+        });
     }
-    PayPointShower = __decorate([
+    GenderPayContrast = __decorate([
         angular2_1.Component({
             selector: 'gender-pay-contrast'
         }),
@@ -33,8 +37,8 @@ var PayPointShower = (function (_super) {
             templateUrl: ng2Helper.getTemplateUrlByComponentPath('shower/log-shower'),
         }), 
         __metadata('design:paramtypes', [angular2.ViewContainerRef])
-    ], PayPointShower);
-    return PayPointShower;
+    ], GenderPayContrast);
+    return GenderPayContrast;
 })(baseChartShower);
-module.exports = PayPointShower;
+module.exports = GenderPayContrast;
 //# sourceMappingURL=GenderPayContrast.js.map

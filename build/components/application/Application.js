@@ -17,6 +17,7 @@ var ng2Helper = require('../../library/ng2Helper');
 var YesterdayLogShower = require('../shower/YesterdayLogShower');
 var YesterdayEventShower = require('../shower/YesterdayEventShower');
 var PayPointShower = require('../shower/PayPointShower');
+var GenderPayContrast = require('../shower/GenderPayContrast');
 var Application = (function () {
     function Application() {
         this.showerList = [];
@@ -31,7 +32,7 @@ var Application = (function () {
         }),
         angular2_1.View({
             templateUrl: ng2Helper.getTemplateUrlByComponentName('application'),
-            directives: [YesterdayLogShower, YesterdayEventShower, PayPointShower]
+            directives: [YesterdayLogShower, YesterdayEventShower, PayPointShower, GenderPayContrast]
         }), 
         __metadata('design:paramtypes', [])
     ], Application);

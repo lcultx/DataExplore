@@ -40,6 +40,7 @@
         "./src/server/TitledArray2.ts",
         "./src/server/config.ts",
         "./src/server/main.ts",
+        "./src/server/router/get_gender_pay_contrast.ts",
         "./src/server/router/get_pay_point.ts",
         "./src/server/router/get_yesterday_all_server_logging.ts",
         "./src/server/router/get_yesterday_events.ts",
@@ -48,6 +49,8 @@
         "./src/server/tasks/WanbaSDKLogs2Local.ts",
         "./src/server/tasks/history_logs_track.ts",
         "./src/server/tasks/index.ts",
-        "./src/server/tasks/interface.d.ts"
+        "./src/server/tasks/interface.d.ts",
+        "./src/server/views/baseChartView.ts",
+        "./src/server/views/interface.d.ts"
     ]
 }
