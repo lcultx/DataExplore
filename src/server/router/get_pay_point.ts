@@ -6,6 +6,7 @@ var ExecTime = require('exec-time');
 var walk = require('fs-walk');
 import path = require('path');
 import querystring = require('querystring');
+import config = require('../config');
 
 var get_pay_point = function(req,res){
 
@@ -33,7 +34,7 @@ var get_pay_point = function(req,res){
     return payPointList;
   }
 
-  var logDir = '/Users/xuyang/src/DataExplore/resource/wanba_logs';
+  var logDir = config.getWanbaSDKLogsDir();
   walk.files(logDir, function(basedir, filename, stat, next) {
 
 

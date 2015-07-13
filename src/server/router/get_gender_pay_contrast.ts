@@ -7,7 +7,7 @@ var walk = require('fs-walk');
 import path = require('path');
 import querystring = require('querystring');
 var moment = require('moment');
-
+import config = require('../config');
 
 
 var  goodsInfo =
@@ -77,7 +77,7 @@ var  goods = [
 
 function getObList(callback:(options)=>void){
   var obList = [];
-  var logDir = '/Users/xuyang/src/DataExplore/resource/wanba_logs';
+  var logDir = config.getWanbaSDKLogsDir();
   walk.files(logDir, function(basedir, filename, stat, next) {
 
 

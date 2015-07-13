@@ -25,8 +25,8 @@ class SimpleChart  implements IChartShower{
    constructor(viewContrainer:angular2.ViewContainerRef){
      this.$elem = $('#simpleChart');
 
-     $.get('/gender_pay_contrast',(data)=>{
-            
+     $.get(this.getApiURL(),(data)=>{
+
        this.option = data;
        this.drawChart();
      })
@@ -34,6 +34,10 @@ class SimpleChart  implements IChartShower{
 
    setChartOption(option:any){
      this.option = option;
+   }
+
+   getApiURL(){
+     return this.$elem.attr("apiURL");
    }
 
    drawChart(){

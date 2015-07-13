@@ -8,7 +8,9 @@ var baseChartView = require('./baseChartView');
 var gender_pay_contrast = (function (_super) {
     __extends(gender_pay_contrast, _super);
     function gender_pay_contrast() {
-        _super.apply(this, arguments);
+        _super.call(this);
+        this.apiURL = '/adffds';
+        this.setApiURL('/gender_pay_contrast');
     }
     return gender_pay_contrast;
 })(baseChartView);

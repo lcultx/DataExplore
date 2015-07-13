@@ -20,13 +20,16 @@ var SimpleChart = (function () {
         var _this = this;
         this.echarts = echarts;
         this.$elem = $('#simpleChart');
-        $.get('/gender_pay_contrast', function (data) {
+        $.get(this.getApiURL(), function (data) {
             _this.option = data;
             _this.drawChart();
         });
     }
     SimpleChart.prototype.setChartOption = function (option) {
         this.option = option;
+    };
+    SimpleChart.prototype.getApiURL = function () {
+        return this.$elem.attr("apiURL");
     };
     SimpleChart.prototype.drawChart = function () {
         if (this.option) {

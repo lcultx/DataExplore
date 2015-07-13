@@ -4,6 +4,7 @@ var ExecTime = require('exec-time');
 var walk = require('fs-walk');
 var path = require('path');
 var querystring = require('querystring');
+var config = require('../config');
 var get_pay_point = function (req, res) {
     var profiler = new ExecTime('getPayPointShower');
     profiler.beginProfiling();
@@ -23,7 +24,7 @@ var get_pay_point = function (req, res) {
         }
         return payPointList;
     }
-    var logDir = '/Users/xuyang/src/DataExplore/resource/wanba_logs';
+    var logDir = config.getWanbaSDKLogsDir();
     walk.files(logDir, function (basedir, filename, stat, next) {
         if (filename == 'info.log') {
             var file = path.join(basedir, filename);
