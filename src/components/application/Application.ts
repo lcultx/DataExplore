@@ -6,6 +6,7 @@ import {Component, Directive, View, Parent} from 'angular2/angular2';
 import ng2Helper = require('../../library/ng2Helper');
 import YesterdayLogShower = require('../shower/YesterdayLogShower');
 import YesterdayEventShower = require('../shower/YesterdayEventShower');
+import PayPointShower = require('../shower/PayPointShower');
 
 @Component({
   selector: 'application'
@@ -13,12 +14,12 @@ import YesterdayEventShower = require('../shower/YesterdayEventShower');
 
 @View({
   templateUrl: ng2Helper.getTemplateUrlByComponentName('application'),
-  directives: [YesterdayLogShower,YesterdayEventShower]
+  directives: [YesterdayLogShower,YesterdayEventShower,PayPointShower]
 })
 
 class Application {
   showerList:Array<ILogShower> = [];
-  addShower(shower:ILogShower){
+  addShower(shower:ILogShower){ 
     this.showerList.push(shower);
   };
 }

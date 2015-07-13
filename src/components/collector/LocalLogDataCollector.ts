@@ -35,6 +35,14 @@ class LocalLogDataCollector extends events.EventEmitter implements ILogCollector
     this.parser = new Parser();
   };
 
+  parseLine(line){
+    if(this.parser){
+      return this.parser.parse(line);
+    }else{
+      return line;
+    }
+  }
+
   run(){
     var count = 0;
 
@@ -42,7 +50,7 @@ class LocalLogDataCollector extends events.EventEmitter implements ILogCollector
     readStream.setEncoding('utf8');
     StreamHelper.readLines(readStream,(line,end)=>{
 
-      var ob = this.parser.parse(line);
+      var ob = this.parseLine(line)
       if(end){
         this.emit('end',ob);
       }else{

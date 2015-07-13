@@ -5,10 +5,6 @@ import {Component, Directive, View, Parent} from 'angular2/angular2';
 import angular2 = require('angular2/angular2');
 import ng2Helper = require('../../library/ng2Helper');
 
-
-
-
-
 @Component({
   selector: 'yesterday-event-shower'
 })
@@ -19,9 +15,6 @@ import ng2Helper = require('../../library/ng2Helper');
 
 
 class YesterdayEventShower extends baseChartShower implements IChartShower{
-
-
-
 
 
   constructor(viewContrainer:angular2.ViewContainerRef){
@@ -175,19 +168,9 @@ class YesterdayEventShower extends baseChartShower implements IChartShower{
         }
 
         this.drawChart();
-
-
-
     })
 
-
-
-
-
   }
-
-
-
 
 }
 

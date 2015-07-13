@@ -33,13 +33,21 @@ var LocalLogDataCollector = (function (_super) {
         this.parser = new Parser();
     };
     ;
+    LocalLogDataCollector.prototype.parseLine = function (line) {
+        if (this.parser) {
+            return this.parser.parse(line);
+        }
+        else {
+            return line;
+        }
+    };
     LocalLogDataCollector.prototype.run = function () {
         var _this = this;
         var count = 0;
         var readStream = fs.createReadStream(this.file);
         readStream.setEncoding('utf8');
         StreamHelper.readLines(readStream, function (line, end) {
-            var ob = _this.parser.parse(line);
+            var ob = _this.parseLine(line);
             if (end) {
                 _this.emit('end', ob);
             }
