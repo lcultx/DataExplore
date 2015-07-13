@@ -1,3 +1,5 @@
+/// <reference path="../../../typings/express/express.d.ts"/>
 interface IChartView{
-  getOptions();
+  api(req,res);
+  render(req,res);
 }

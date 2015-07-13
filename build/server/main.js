@@ -10,6 +10,8 @@ app.use(express.static(web_path));
 app.get('/yesterday_events', require('./router/get_yesterday_events'));
 app.get('/pay_point', require('./router/get_pay_point'));
 app.get('/gender_pay_contrast', require('./router/get_gender_pay_contrast'));
+var views = require('./views');
+views.loadViews(app);
 var server = require('http').Server(app);
 server.listen(config.port, function () {
     console.log('data-explore server is listening on port ' + config.port);

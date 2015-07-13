@@ -17,7 +17,6 @@ var QZoneLatteLogs2Local = (function () {
         var sched = { schedules: [{ h: [3], m: [35] }] };
         later.setInterval(function () {
             _this.download(moment().subtract(1, 'days'));
-            require('./history_logs_track');
         }, sched);
     };
     QZoneLatteLogs2Local.getInstance = function () {
@@ -50,4 +49,4 @@ var QZoneLatteLogs2Local = (function () {
     return QZoneLatteLogs2Local;
 })();
 module.exports = QZoneLatteLogs2Local;
-//# sourceMappingURL=QzoneLatteLogs2Local.js.map
+//# sourceMappingURL=QZoneLatteLogs2Local.js.map

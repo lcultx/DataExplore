@@ -30,6 +30,8 @@
         "./src/components/shower/GenderPayContrast.ts",
         "./src/components/shower/OneDayLogShower.ts",
         "./src/components/shower/PayPointShower.ts",
+        "./src/components/shower/SimpleChart.ts",
+        "./src/components/shower/SimpleChartLoader.ts",
         "./src/components/shower/YesterdayEventShower.ts",
         "./src/components/shower/YesterdayLogShower.ts",
         "./src/components/shower/baseChartShower.ts",
@@ -51,6 +53,8 @@
         "./src/server/tasks/index.ts",
         "./src/server/tasks/interface.d.ts",
         "./src/server/views/baseChartView.ts",
+        "./src/server/views/gender_pay_contrast.ts",
+        "./src/server/views/index.ts",
         "./src/server/views/interface.d.ts"
     ]
 }
