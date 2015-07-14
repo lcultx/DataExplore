@@ -1,1 +1,0 @@
-{"version":3,"file":"history_logs_import.js","sourceRoot":"","sources":["../../../src/server/tasks/history_logs_import.ts"],"names":["run"],"mappings":"AAGA,IAAO,MAAM,WAAW,WAAW,CAAC,CAAC;AAErC,IAAI,IAAI,GAAG,OAAO,CAAC,SAAS,CAAC,CAAC;AAC9B,IAAI,QAAQ,GAAG,MAAM,CAAC,oBAAoB,EAAE,CAAC;AAE7C;AAEAA,CAACA;AAED,GAAG,EAAE,CAAC"}

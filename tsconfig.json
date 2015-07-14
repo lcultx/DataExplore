@@ -53,6 +53,7 @@
         "./src/server/tasks/index.ts",
         "./src/server/tasks/interface.d.ts",
         "./src/server/tasks/qzone_history_logs_import.ts",
+        "./src/server/tasks/wanba_history_logs_import.ts",
         "./src/server/views/baseChartView.ts",
         "./src/server/views/gender_pay_contrast.ts",
         "./src/server/views/index.ts",
