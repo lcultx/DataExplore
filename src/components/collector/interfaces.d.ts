@@ -11,6 +11,8 @@ interface ILogCollector extends ICollector{
   setLogURI(url:string);
   setParser(parser:ILogParser);
   setLogModelAsParser(model:IEventLogModel);
+  //Event line
+  //Event end
 }
 
 interface ILogParser{

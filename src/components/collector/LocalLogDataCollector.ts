@@ -50,11 +50,12 @@ class LocalLogDataCollector extends events.EventEmitter implements ILogCollector
     readStream.setEncoding('utf8');
     StreamHelper.readLines(readStream,(line,end)=>{
 
-      var ob = this.parseLine(line)
+      var ob = this.parseLine(line);
+      if(ob){
+          this.emit('line',ob);
+      }
       if(end){
-        this.emit('end',ob);
-      }else{
-        this.emit('line',ob);
+        this.emit('end');
       }
     })
   };

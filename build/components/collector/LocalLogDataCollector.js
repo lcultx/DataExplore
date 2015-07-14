@@ -48,11 +48,11 @@ var LocalLogDataCollector = (function (_super) {
         readStream.setEncoding('utf8');
         StreamHelper.readLines(readStream, function (line, end) {
             var ob = _this.parseLine(line);
-            if (end) {
-                _this.emit('end', ob);
-            }
-            else {
+            if (ob) {
                 _this.emit('line', ob);
+            }
+            if (end) {
+                _this.emit('end');
             }
         });
     };

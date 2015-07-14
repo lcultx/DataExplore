@@ -1,1 +1,1 @@
-{"version":3,"file":"TitledArray2.js","sourceRoot":"","sources":["../../src/server/TitledArray2.ts"],"names":["TitledArray2","TitledArray2.constructor","TitledArray2.forEach"],"mappings":";;;;;AACA;IAA4BA,gCAAKA;IAAjCA;QAA4BC,8BAAKA;IAIjCA,CAACA;IAHCD,8BAAOA,GAAPA;IAEAE,CAACA;IACHF,mBAACA;AAADA,CAACA,AAJD,EAA4B,KAAK,EAIhC"}
+{"version":3,"file":"TitledArray2.js","sourceRoot":"","sources":["../../src/server/TitledArray2.ts"],"names":[],"mappings":""}

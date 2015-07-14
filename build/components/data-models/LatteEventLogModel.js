@@ -5,6 +5,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 /// <reference path="./interfaces.d.ts"/>
 var baseEventLogModel = require('./baseEventLogModel');
+var moment = require('moment');
 var LatteEventLogModel = (function (_super) {
     __extends(LatteEventLogModel, _super);
     function LatteEventLogModel(ob) {
@@ -13,18 +14,21 @@ var LatteEventLogModel = (function (_super) {
     LatteEventLogModel.prototype.parseLogLine = function (line) {
         if (line) {
             var splitList = line.split(' ');
-            var time = splitList[1];
-            time = time.substr(0, time.length - 1);
+            var time = splitList[0].split('[')[1] + ' ' + splitList[1].split('.')[0];
+            var mm = moment(time, 'YYYY-MM-DD HH:mm:ss');
             var player_name = splitList[10];
-            player_name = player_name.substr(0, player_name.length - 1);
-            var player_action = splitList[5];
-            if (player_action.indexOf('切换场') > -1 && player_action != '切换场景') {
-                console.log(player_action);
-                console.log(line);
+            if (player_name) {
+                player_name = player_name.substr(0, player_name.length - 1);
             }
+            else {
+                if (splitList[11] = '[') {
+                    player_name = '[    ]';
+                }
+            }
+            var player_action = splitList[5];
             var request_url = splitList[6];
             return {
-                time: time,
+                time: mm.toDate(),
                 player_name: player_name,
                 player_action: player_action,
                 request_url: request_url
