@@ -24,16 +24,12 @@ class baseChartView implements IChartView{
 
   setApiURL(url:string){
     this.apiURL = url;
-    console.log('url',url);
-    console.log('setApiURL',this.apiURL)
   }
   getApiURL(){
-    console.log('getApiURL',this.apiURL);
     return this.apiURL;
   }
   getTemplate(){
     var apiURL = this.getApiURL();
-    console.log('apiURL',apiURL);
     var template = `
       <!DOCTYPE html>
 
@@ -69,10 +65,13 @@ class baseChartView implements IChartView{
   }
 
   api(req,res){
-    var profiler = new ExecTime('getPayPointShower');
+    var profiler = new ExecTime(this.getApiURL());
     profiler.beginProfiling();
     this.loadData((data)=>{
-        res.json(this.getChartOptions(data));
+      profiler.step(this.getApiURL() + ' loaded data');
+      var options = this.getChartOptions(data);
+      profiler.step(this.getApiURL() + ' finish')
+      res.json(options);
     })
   };
 

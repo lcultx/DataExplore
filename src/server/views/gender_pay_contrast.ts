@@ -178,8 +178,7 @@ class gender_pay_contrast extends baseChartView implements IChartView{
           }
 
           var hour = ob.time.getHours();
-          console.log(hour);
-          console.log(timePayRecord[hour]);
+
           if(!timePayRecord[hour]){
             timePayRecord[hour] = {
               M:0,F:0,U:0
@@ -195,7 +194,7 @@ class gender_pay_contrast extends baseChartView implements IChartView{
               timePayRecord[hour].U += money;
           }
       }
-      console.log(timePayRecord);
+
       for(var j=0;j<timeList.length;j++){
 
         var record = timePayRecord[j];

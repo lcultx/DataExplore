@@ -27,8 +27,6 @@
         "./src/components/data-models/LatteEventLogModel.ts",
         "./src/components/data-models/baseEventLogModel.ts",
         "./src/components/data-models/interfaces.d.ts",
-        "./src/components/shower/GenderPayContrast.ts",
-        "./src/components/shower/OneDayLogShower.ts",
         "./src/components/shower/PayPointShower.ts",
         "./src/components/shower/SimpleChart.ts",
         "./src/components/shower/SimpleChartLoader.ts",
@@ -61,6 +59,6 @@
         "./src/server/views/interface.d.ts",
         "./src/server/views/pay_point.ts",
         "./src/server/views/simple_chart_view.ts",
-        "./src/server/views/yesterday_log.ts"
+        "./src/server/views/yesterday_log_event.ts"
     ]
 }

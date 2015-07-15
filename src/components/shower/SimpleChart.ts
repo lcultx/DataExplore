@@ -5,7 +5,6 @@
 import {Component, Directive, View, Parent} from 'angular2/angular2';
 import angular2 = require('angular2/angular2');
 import ng2Helper = require('../../library/ng2Helper');
-import baseChartShower = require('./baseChartShower');
 var echarts = require('echarts').echarts;
 @Component({
   selector: 'simple-chart'
@@ -59,8 +58,6 @@ class SimpleChart  implements IChartShower{
        this.myChart = this.echarts.init(targetElement);
        return this.myChart;
      }
-
-
 
    }
 
