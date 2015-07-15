@@ -12,10 +12,10 @@ export function run(){
 //  var t = setInterval(()=>{
     theday = theday.subtract(1,'day');
     var qLogs = QZoneLatteLogs2Local.getInstance();
-    if(!qLogs.exist(theday)){
+    //if(!qLogs.exist(theday)){
       qLogs.download(theday);
       console.log('downlading logs of' + theday);
-    }
+    //}
 //  },1000*60*5);
 
 }
