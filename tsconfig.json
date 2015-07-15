@@ -60,6 +60,7 @@
         "./src/server/views/index.ts",
         "./src/server/views/interface.d.ts",
         "./src/server/views/pay_point.ts",
+        "./src/server/views/simple_chart_view.ts",
         "./src/server/views/yesterday_log.ts"
     ]
 }
