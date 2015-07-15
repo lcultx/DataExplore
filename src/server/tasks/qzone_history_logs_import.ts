@@ -51,7 +51,7 @@ function filelog2db(file,server_name){
     ldCollector.on('end',function(){
       console.log('finish');
     });
-  //  ldCollector.run();
+    ldCollector.run();
   });
 
 
