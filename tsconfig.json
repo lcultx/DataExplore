@@ -42,8 +42,6 @@
         "./src/server/TitledArray2.ts",
         "./src/server/config.ts",
         "./src/server/main.ts",
-        "./src/server/router/get_gender_pay_contrast.ts",
-        "./src/server/router/get_gender_pay_contrast_from_db.ts",
         "./src/server/router/get_pay_point.ts",
         "./src/server/router/get_yesterday_all_server_logging.ts",
         "./src/server/router/get_yesterday_events.ts",
@@ -60,6 +58,8 @@
         "./src/server/views/baseChartView.ts",
         "./src/server/views/gender_pay_contrast.ts",
         "./src/server/views/index.ts",
-        "./src/server/views/interface.d.ts"
+        "./src/server/views/interface.d.ts",
+        "./src/server/views/pay_point.ts",
+        "./src/server/views/yesterday_log.ts"
     ]
 }
