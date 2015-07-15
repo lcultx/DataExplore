@@ -10,7 +10,7 @@ export function run(){
 
   var theday = moment().subtract(1, 'days');
 //  var t = setInterval(()=>{
-    theday = theday.subtract(1,'day');
+  //  theday = theday.subtract(1,'day');
     var qLogs = QZoneLatteLogs2Local.getInstance();
     //if(!qLogs.exist(theday)){
       qLogs.download(theday);
