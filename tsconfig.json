@@ -27,11 +27,9 @@
         "./src/components/data-models/LatteEventLogModel.ts",
         "./src/components/data-models/baseEventLogModel.ts",
         "./src/components/data-models/interfaces.d.ts",
-        "./src/components/shower/PayPointShower.ts",
         "./src/components/shower/SimpleChart.ts",
         "./src/components/shower/SimpleChartLoader.ts",
         "./src/components/shower/YesterdayEventShower.ts",
-        "./src/components/shower/YesterdayLogShower.ts",
         "./src/components/shower/baseChartShower.ts",
         "./src/components/shower/interfaces.d.ts",
         "./src/index.ts",
@@ -40,8 +38,6 @@
         "./src/server/TitledArray2.ts",
         "./src/server/config.ts",
         "./src/server/main.ts",
-        "./src/server/router/get_pay_point.ts",
-        "./src/server/router/get_yesterday_all_server_logging.ts",
         "./src/server/router/get_yesterday_events.ts",
         "./src/server/router/index.ts",
         "./src/server/shuijing_config.ts",
@@ -58,7 +54,6 @@
         "./src/server/views/index.ts",
         "./src/server/views/interface.d.ts",
         "./src/server/views/pay_point.ts",
-        "./src/server/views/simple_chart_view.ts",
-        "./src/server/views/yesterday_log_event.ts"
+        "./src/server/views/simple_chart_view.ts"
     ]
 }

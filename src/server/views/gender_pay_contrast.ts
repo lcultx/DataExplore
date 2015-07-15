@@ -1,10 +1,10 @@
 /// <reference path="./interface.d.ts"/>
 /// <reference path="../../../typings/async/async.d.ts"/>
 import baseChartView = require('./baseChartView');
-import mogHelper = require('../../library/mogHelper');
 import shuijing_config = require('../shuijing_config');
 import querystring = require('querystring');
 import async = require('async');
+import mogHelper = require('../../library/mogHelper');
 
 var wanba_collection = mogHelper.getWanbaLogEventCollection();
 
