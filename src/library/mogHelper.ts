@@ -11,7 +11,7 @@ export function getWanbaLogEventCollection():mongodb.Collection{
 
 export function getQZoneLogEventCollection():mongodb.Collection{
   return qzoneCollection;
-}
+} 
 
 export function init(callback:()=>void){
   var MongoClient = mongodb.MongoClient;
@@ -23,5 +23,5 @@ export function init(callback:()=>void){
 }
 
 export function fiberQuery(query){
-  
+
 }

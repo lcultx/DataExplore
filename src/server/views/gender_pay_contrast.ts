@@ -1,4 +1,5 @@
 /// <reference path="./interface.d.ts"/>
+/// <reference path="../../../typings/async/async.d.ts"/>
 import baseChartView = require('./baseChartView');
 import mogHelper = require('../../library/mogHelper');
 import shuijing_config = require('../shuijing_config');
