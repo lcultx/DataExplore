@@ -1,7 +1,21 @@
 /// <reference path="./interface.d.ts"/>
+var ExecTime = require('exec-time');
 var baseChartView = (function () {
-    function baseChartView() {
+    function baseChartView(cfg) {
+      console.log(cfg);
+        if (cfg.apiURL) {
+            this.apiURL = cfg.apiURL;
+        }
+        if (cfg.viewURL) {
+            this.viewURL = cfg.viewURL;
+        }
     }
+    baseChartView.prototype.loadData = function (callback) {
+        throw new Error('you are calling abstarct method');
+    };
+    baseChartView.prototype.getChartOptions = function (data) {
+        throw new Error('you are calling abstarct method');
+    };
     baseChartView.prototype.setApiURL = function (url) {
         this.apiURL = url;
         console.log('url', url);
@@ -18,7 +32,12 @@ var baseChartView = (function () {
         return template;
     };
     baseChartView.prototype.api = function (req, res) {
-        throw new Error('must be overide buy sub class');
+        var _this = this;
+        var profiler = new ExecTime('getPayPointShower');
+        profiler.beginProfiling();
+        this.loadData(function (data) {
+            res.json(_this.getChartOptions(data));
+        });
     };
     ;
     baseChartView.prototype.render = function (req, res) {

@@ -1,10 +1,27 @@
 /// <reference path="./interface.d.ts"/>
+var ExecTime = require('exec-time');
 class baseChartView implements IChartView{
   apiURL:string;
-
-  constructor(){
-
+  viewURL:string;
+  constructor(cfg:any){
+    if(cfg.apiURL){
+      this.apiURL = cfg.apiURL;
+    }
+    if(cfg.viewURL){
+      this.viewURL = cfg.viewURL;
+    }
   }
+
+  loadData(callback:(data)=>void){
+    throw new Error('you are calling abstarct method');
+  }
+
+  getChartOptions(data):any{
+    throw new Error('you are calling abstarct method');
+  }
+
+
+
   setApiURL(url:string){
     this.apiURL = url;
     console.log('url',url);
@@ -52,8 +69,13 @@ class baseChartView implements IChartView{
   }
 
   api(req,res){
-    throw new Error('must be overide buy sub class')
+    var profiler = new ExecTime('getPayPointShower');
+    profiler.beginProfiling();
+    this.loadData((data)=>{
+        res.json(this.getChartOptions(data));
+    })
   };
+
   render(req,res){
     res.write(this.getTemplate());
   };

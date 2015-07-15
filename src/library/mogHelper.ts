@@ -21,3 +21,7 @@ export function init(callback:()=>void){
     callback();
   });
 }
+
+export function fiberQuery(query){
+  
+}

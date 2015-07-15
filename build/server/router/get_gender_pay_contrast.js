@@ -20,7 +20,6 @@ function parseGoodInfo() {
             itemid: parts[3] * 1, desc: parts[2], price: parts[1] * 1, zoneid: parts[0] * 1
         });
     }
-    console.log(goods);
     return goods;
 }
 goods = parseGoodInfo();

@@ -19,4 +19,7 @@ function init(callback) {
     });
 }
 exports.init = init;
+function fiberQuery(query) {
+}
+exports.fiberQuery = fiberQuery;
 //# sourceMappingURL=mogHelper.js.map

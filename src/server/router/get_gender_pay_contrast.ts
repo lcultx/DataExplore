@@ -56,7 +56,7 @@ var  goods = [
             itemid:<any>parts[3]*1,desc:<any>parts[2],price:<any>parts[1]*1,zoneid:<any>parts[0]*1
         });
     }
-    console.log(goods);
+  
     return goods;
   }
 
