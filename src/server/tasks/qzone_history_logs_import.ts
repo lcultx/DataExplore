@@ -41,6 +41,7 @@ function filelog2db(file,server_name){
     ldCollector.setLogModelAsParser(new LatteEventLogModel({}));
     ldCollector.on('line',function(ob){
       ob.server_name = server_name;
+      ob.theday_str =  theday_str ;
       mogHelper.getQZoneLogEventCollection().insert(ob,function(err,docs){
         if(err){
           console.log(err);

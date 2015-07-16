@@ -43,6 +43,7 @@ function filelog2db(file,server_name){
         ob.data.res = JSON.parse(ob.data.res);
         ob.server_name = server_name
         ob.time = new Date(ob.time);
+        ob.theday_str = theday_str;
         wanba_collection.insert(ob,function(err,result){
           if(err){
             console.log(err);
