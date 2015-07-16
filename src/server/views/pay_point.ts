@@ -114,7 +114,7 @@ class simple_chart_view extends baseChartView implements IChartView{
       var number = payItemRecord[itemid];
       var good = this.getGoodByItemId(itemid);
       if(good){
-          option.xAxis[0].data.push(good.desc);
+          option.xAxis[0].data.push(itemid);
           option.series[0].data.push(number);
       }else{
         console.log('good',good);

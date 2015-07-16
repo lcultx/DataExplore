@@ -1,6 +1,7 @@
 
 var  goodsInfo =
-`1	60	60水晶	2480
+`
+1	60	60水晶	2480
 1	300	300水晶	2517
 1	980	980水晶	2519
 1	1980	1980水晶	2521
@@ -29,7 +30,8 @@ var  goodsInfo =
 2	10	10水晶	2733
 2	20	20水晶	2734
 2	110	110水晶	2735
-2	200	200水晶	2749`
+2	200	200水晶	2749
+`
 
 var goods = [
   {itemid:2480,  desc:'60水晶',    price:60,   zoneid:1}
@@ -47,4 +49,14 @@ export function getGoodList():Array<{itemid:number,desc:string,price:number,zone
   }
 
   return goods;
+}
+
+export function getGoodByItemId(itemid){
+  var goods = getGoodList();
+  for(var i=0;i<goods.length;i++){
+    var good = goods[i];
+    if(good.itemid*1 == itemid*1){
+      return good;
+    }
+  }
 }

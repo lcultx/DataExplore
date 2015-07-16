@@ -51,8 +51,10 @@
         "./src/server/tasks/wanba_history_logs_import.ts",
         "./src/server/views/baseChartView.ts",
         "./src/server/views/gender_pay_contrast.ts",
+        "./src/server/views/get_pay_number.ts",
         "./src/server/views/index.ts",
         "./src/server/views/interface.d.ts",
+        "./src/server/views/leave_and_left.ts",
         "./src/server/views/pay_point.ts",
         "./src/server/views/simple_chart_view.ts"
     ]
