@@ -11,50 +11,6 @@ import async = require('async');
 var wanba_collection = mogHelper.getWanbaLogEventCollection();
 var qzone_collection = mogHelper.getQZoneLogEventCollection();
 
-function getTheDayCreateUsers(mm,callback){
-
-  qzone_collection.find({
-    player_action: "创建角色",
-    theday_str:mm.format("YYYY/MM/DD")
-  }).toArray(function(err,results){
-
-    getLeft(results,mm.clone().add(1, 'd'),function(number){
-        callback([results.length,number]);
-    });
-  });
-}
-
-function userHasActiveInThisDay(user,mm,callback){
-  var query = {
-    player_name:user.player_name,
-    server_name:user.server_name,
-    theday_str:mm.format("YYYY/MM/DD")
-  };
-  console.log(query);
-  qzone_collection.findOne(query,function(err,result){
-
-    if(result && result.server_name){
-      callback(true)
-    }else{
-      callback(false);
-    }
-  })
-}
-
-function getLeft(users,mm,callback){
- var left = 0;
- async.each(users,function(user,cb){
-   userHasActiveInThisDay(user,mm,function(exist){
-     if(exist){
-       left = left + 1;
-     }
-     cb();
-   });
- },function(){
-   callback(left);
- });
-}
-
 
 
 /*
@@ -73,7 +29,42 @@ function getLeft(users,mm,callback){
      Collection: { acquireCount: { R: 3788 } } } 1424ms
 
 */
+
 class leave_and_left extends baseChartView implements IChartView{
+
+
+
+  private userHasActiveInThisDay(user,mm,callback){
+    var query = {
+      player_name:user.player_name,
+      server_name:user.server_name,
+      theday_str:mm.format("YYYY/MM/DD")
+    };
+    console.log(query);
+    qzone_collection.findOne(query,(err,result)=>{
+
+      if(result && result.server_name){
+        callback(true)
+      }else{
+        callback(false);
+      }
+    })
+  }
+
+  private getLeft(users,mm,callback){
+   var left = 0;
+   async.each(users,(user,cb)=>{
+     this.userHasActiveInThisDay(user,mm,function(exist){
+       if(exist){
+         left = left + 1;
+       }
+       cb();
+     });
+   },function(){
+     callback(left);
+   });
+  }
+
 
   constructor(cfg){
     super(cfg);
@@ -84,8 +75,14 @@ class leave_and_left extends baseChartView implements IChartView{
     var start_day = moment('2015-07-12');
     var end_day = moment('2015-07-14');
 
-    getTheDayCreateUsers(start_day,function(results){
-      callback(results);
+    qzone_collection.find({
+      player_action: "创建角色",
+      theday_str:mm.format("YYYY/MM/DD")
+    }).toArray((err,results)=>{
+
+      this.getLeft(results,mm.clone().add(1, 'd'),(number)=>{
+          callback([results.length,number]);
+      });
     });
 
   }
