@@ -20,10 +20,12 @@ class leave_and_left extends baseChartView implements IChartView{
 
 
   private userHasActiveInThisDay(user,mm,callback){
+
     var query = {
       player_name:user.player_name,
       server_name:user.server_name,
-      theday_str:mm.format("YYYY/MM/DD")
+      theday_str:mm.format("YYYY/MM/DD"),
+      player_action:{$ne:"创建角色"}
     };
 
     qzone_collection.findOne(query,(err,result)=>{
@@ -74,6 +76,36 @@ class leave_and_left extends baseChartView implements IChartView{
     return query;
   }
 
+
+
+  distinctResults(results){
+
+
+
+    this.step('distinct start');
+    var newResults = [];
+
+    function isExistInResults(result){
+      for(var i in newResults){
+        var new_record = newResults[i];
+        if(new_record.player_name == result.player_name){
+          return true;
+        }
+      }
+    }
+
+    for(var i in results){
+      var result = results[i];
+      if(!isExistInResults(result)){
+        newResults.push(result);
+      }
+    }
+
+    this.step('distinct finish');
+
+    return newResults;
+  }
+
   getTheDayLeaveAndLeft(callback,record){
 
     var mm = record.theday;
@@ -81,6 +113,8 @@ class leave_and_left extends baseChartView implements IChartView{
     var query = this.getDailyUserQueryer(mm);
     qzone_collection.find(query).toArray((err,results)=>{
       this.query_profile(query);
+
+      results = this.distinctResults(results);
 
       var left_days = [];
       var lefts = [results.length];
@@ -90,6 +124,7 @@ class leave_and_left extends baseChartView implements IChartView{
 
 
       async.each(left_days,(mm,cb)=>{
+        console.log('active day',mm.toDate());
         this.getLeft(results,mm,(number)=>{
             lefts.push(number);
             cb();
@@ -151,7 +186,7 @@ class leave_and_left extends baseChartView implements IChartView{
 
   public csv(req,res){
     this.query = req.query;
-
+    var rate = req.query.rate;
     this.loadData((data)=>{
       var csv_str = '';
       var first_day_record = data[0];
@@ -165,9 +200,14 @@ class leave_and_left extends baseChartView implements IChartView{
       for(var i=0;i<first_day_result.length;i++){
         var line = '';
         for(var j=0;j<data.length;j++){
-          var val = '';
+          var val:any = '';
+
           if(i<data[j].result.length){
             val = data[j].result[i];
+            if(rate && i!=0){
+              val = Math.round(val/data[j].result[0]*10000)/100 + '%';
+            }
+
           }
           line += val + ',';
         }

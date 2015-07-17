@@ -29,7 +29,6 @@
         "./src/components/data-models/interfaces.d.ts",
         "./src/components/shower/SimpleChart.ts",
         "./src/components/shower/SimpleChartLoader.ts",
-        "./src/components/shower/TableView.ts",
         "./src/components/shower/YesterdayEventShower.ts",
         "./src/components/shower/baseChartShower.ts",
         "./src/components/shower/interfaces.d.ts",
