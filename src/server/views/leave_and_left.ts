@@ -1,5 +1,6 @@
 /// <reference path="./interface.d.ts"/>
 /// <reference path="../../../typings/async/async.d.ts"/>
+/// <reference path="../../../typings/express/express.d.ts"/>
 import baseChartView = require('./baseChartView');
 
 import mogHelper = require('../../library/mogHelper');
@@ -7,29 +8,12 @@ import shuijing = require('../shuijing_config');
 import querystring = require('querystring');
 import moment = require('moment');
 import async = require('async');
+import express = require('express');
 
 
-var wanba_collection = mogHelper.getWanbaLogEventCollection();
-var qzone_collection = mogHelper.getQZoneLogEventCollection();
+var wanba_collection;
+var qzone_collection;
 
-
-
-/*
-2015-07-16T18:03:46.965+0800 I QUERY
- [conn16] query test.qzone_log_events query:
- { player_name: " 石", server_name: "server2", theday_str: "2015/07/13" }
-  planSummary: IXSCAN { theday_str: 1.0 }
-   ntoskip:0 nscanned:484843
-   nscannedObjects:484843
-   keyUpdates:0 writeConflicts:0
-   numYields:3787 nreturned:0
-   reslen:20
-   locks:{ Global: { acquireCount: { r: 3788 } },
-    MMAPV1Journal: { acquireCount: { r: 3788 } },
-    Database: { acquireCount: { r: 3788 } },
-     Collection: { acquireCount: { R: 3788 } } } 1424ms
-
-*/
 
 class leave_and_left extends baseChartView implements IChartView{
 
@@ -43,7 +27,7 @@ class leave_and_left extends baseChartView implements IChartView{
     };
 
     qzone_collection.findOne(query,(err,result)=>{
-      this.query_profile(query);
+      //this.query_profile(query);
       if(result && result.server_name){
         callback(true)
       }else{
@@ -69,20 +53,32 @@ class leave_and_left extends baseChartView implements IChartView{
 
   constructor(cfg){
     super(cfg);
+    wanba_collection = mogHelper.getWanbaLogEventCollection();
+    qzone_collection = mogHelper.getQZoneLogEventCollection();
+
   }
 
   getThedayStr(mm){
     return mm.format("YYYY/MM/DD")
   }
 
+  getDailyUserQueryer(mm){
+    var query:any = {
+     player_action: "创建角色",
+     theday_str:this.getThedayStr(mm)
+    };
+
+    if(this.query.server_name){
+      query.server_name = this.query.server_name
+    }
+    return query;
+  }
+
   getTheDayLeaveAndLeft(callback,record){
 
     var mm = record.theday;
     var end_day = record.end_day;
-    var query = {
-      player_action: "创建角色",
-      theday_str:this.getThedayStr(mm)
-    };
+    var query = this.getDailyUserQueryer(mm);
     qzone_collection.find(query).toArray((err,results)=>{
       this.query_profile(query);
 
@@ -91,7 +87,6 @@ class leave_and_left extends baseChartView implements IChartView{
       for(var theday=mm.clone().add(1,'d');theday.unix()<=end_day.unix();theday = theday.clone().add(1,'d')){
         left_days.push(theday);
       }
-
 
 
       async.each(left_days,(mm,cb)=>{
@@ -110,10 +105,21 @@ class leave_and_left extends baseChartView implements IChartView{
   }
 
 
-  public loadData(callback:(data)=>void){
-    var start_day = moment('2015-07-12');
-    var end_day = moment('2015-07-14');
-    start_day.unix()
+  public loadData(callback:(data)=>void,req?:express.Request){
+
+    var start_day = moment().subtract(7,'d');
+    var end_day = moment().subtract(1,'d');
+
+    if(req && req.query.start_day){
+      start_day = moment(req.query.start_day,'YYYY/MM/DD');
+    }
+
+    if(req && req.query.end_day){
+      end_day = moment(req.query.end_day,'YYYY/MM/DD');
+    }
+
+    console.log(start_day.toDate());
+    console.log(end_day.toDate());
 
     var lefts = [];
     for(var theday=start_day;theday.unix()<=end_day.unix();theday = theday.clone().add(1,'d')){
@@ -136,6 +142,40 @@ class leave_and_left extends baseChartView implements IChartView{
 
   public getChartOptions(data):any{
       return data;
+  }
+
+  private query;
+
+
+
+
+  public csv(req,res){
+    this.query = req.query;
+
+    this.loadData((data)=>{
+      var csv_str = '';
+      var first_day_record = data[0];
+      var first_day_result = first_day_record.result;
+      var title = '';
+      for(var i=0;i<data.length;i++){
+        var record = data[i];
+        title += this.getThedayStr(record.theday) + ','
+      }
+      csv_str += title + '\n';
+      for(var i=0;i<first_day_result.length;i++){
+        var line = '';
+        for(var j=0;j<data.length;j++){
+          var val = '';
+          if(i<data[j].result.length){
+            val = data[j].result[i];
+          }
+          line += val + ',';
+        }
+        csv_str += line + '\n';
+      }
+      res.write(csv_str);
+      res.end();
+    },req);
   }
 
 }

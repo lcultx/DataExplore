@@ -15,7 +15,7 @@ class baseChartView implements IChartView{
     }
   }
 
-  loadData(callback:(data)=>void){
+  loadData(callback:(data)=>void,req){
     throw new Error('you are calling abstarct method');
   }
 
@@ -91,7 +91,7 @@ class baseChartView implements IChartView{
       var options = this.getChartOptions(data);
       this.step('finish');
       res.json(options);
-    })
+    },req)
   };
 
   render(req,res){

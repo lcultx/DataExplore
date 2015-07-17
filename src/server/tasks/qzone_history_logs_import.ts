@@ -36,7 +36,7 @@ function logfile2db(file,server_name){
       ob.server_name = server_name;
       ob.theday_str =  theday_str ;
       mogHelper.getQZoneLogEventCollection().insert(ob,function(err,docs){
-        profiler.step('insert on object ' + JSON.stringify(ob));
+        profiler.step('insert on object ');
         if(err){
           console.log(err);
         }
@@ -54,8 +54,11 @@ function logfile2db(file,server_name){
 function logfiles2db(dir){
   walk.files(dir, function(basedir, filename, stat, next) {
     var file = path.join(basedir,filename);
-    var server_name = filename.split('.log')[0];
-    logfile2db(file,server_name);
+    if(file.indexOf('.log')> -1){
+      var server_name = filename.split('.log')[0];
+      logfile2db(file,server_name);
+    }
+
    next();
   });
 }
