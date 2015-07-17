@@ -25,32 +25,39 @@ class LatteEventLogModel extends  baseEventLogModel implements IEventLogModel{
   12  "1180",水晶
   ]*/
   parseLogLine(line){
-    if(line){
-      var splitList = line.split(' ');
-      var time = splitList[0].split('[')[1] + ' '  + splitList[1].split('.')[0];//[2015-07-12 01:05:55.680]
-      var mm = moment(time,'YYYY-MM-DD HH:mm:ss');
+    try{
+      if(line){
+        var splitList = line.split(' ');
+        var time = splitList[0].split('[')[1] + ' '  + splitList[1].split('.')[0];//[2015-07-12 01:05:55.680]
+        var mm = moment(time,'YYYY-MM-DD HH:mm:ss');
 
-      var player_name = splitList[10];//"丑的别致."
-      if(player_name){
-          player_name = player_name.substr(0,player_name.length - 1);
+        var player_name = splitList[10];//"丑的别致."
+        if(player_name){
+            player_name = player_name.substr(0,player_name.length - 1);
+        }else{
+            if(splitList[11]='['){
+              player_name = '[    ]';
+            }
+        }
+
+        var player_action = splitList[5];//"卸下装备"
+
+        var request_url = splitList[6];//"/equip/upgrade?partnerIndex=0&index=2&_time=1436198398545&version=v0.0.6&sessionId=a7AB0hWxRBQJKQm4L4QplE9E"
+        return {
+          time:mm.toDate(),
+          player_name:player_name,
+          player_action:player_action,
+          request_url:request_url
+        };
       }else{
-          if(splitList[11]='['){
-            player_name = '[    ]';
-          }
+        return null;
       }
+    }catch(e){
+      console.log(line);
+      console.log(e);
 
-      var player_action = splitList[5];//"卸下装备"
-
-      var request_url = splitList[6];//"/equip/upgrade?partnerIndex=0&index=2&_time=1436198398545&version=v0.0.6&sessionId=a7AB0hWxRBQJKQm4L4QplE9E"
-      return {
-        time:mm.toDate(),
-        player_name:player_name,
-        player_action:player_action,
-        request_url:request_url
-      };
-    }else{
-      return null;
     }
+
   }
 
 
