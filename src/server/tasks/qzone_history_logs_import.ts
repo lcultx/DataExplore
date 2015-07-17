@@ -73,6 +73,7 @@ function run(){
     if(theday_str){
       dailyLogfiles2db(moment(theday_str,'YYYY/MM/DD'))
     }else{
+      profiler.beginProfiling();
       var qlogs_dir = config.getQZoneLatteLogsDir();
       logfiles2db(qlogs_dir);
     }
