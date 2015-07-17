@@ -3,6 +3,9 @@ var ExecTime = require('exec-time');
 class baseChartView implements IChartView{
   apiURL:string;
   viewURL:string;
+
+  profiler;
+
   constructor(cfg:any){
     if(cfg.apiURL){
       this.apiURL = cfg.apiURL;
@@ -64,13 +67,29 @@ class baseChartView implements IChartView{
       return template;
   }
 
+  getProfiler(str?:string){
+    if(!this.profiler){
+      this.profiler =  new ExecTime(str||this.getApiURL());
+      this.profiler.beginProfiling();
+    }
+    return this.profiler;
+  }
+
+
+  query_profile(query){
+    console.log('query finish');
+    this.getProfiler().step(JSON.stringify(query));
+  }
+
+  step(str){
+    this.getProfiler().step(this.getApiURL() +  " " + str);
+  }
+
   api(req,res){
-    var profiler = new ExecTime(this.getApiURL());
-    profiler.beginProfiling();
     this.loadData((data)=>{
-      profiler.step(this.getApiURL() + ' loaded data');
+    this.step('loaded data');
       var options = this.getChartOptions(data);
-      profiler.step(this.getApiURL() + ' finish')
+      this.step('finish');
       res.json(options);
     })
   };

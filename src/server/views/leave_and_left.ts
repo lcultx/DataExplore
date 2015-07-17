@@ -8,6 +8,7 @@ import querystring = require('querystring');
 import moment = require('moment');
 import async = require('async');
 
+
 var wanba_collection = mogHelper.getWanbaLogEventCollection();
 var qzone_collection = mogHelper.getQZoneLogEventCollection();
 
@@ -40,9 +41,9 @@ class leave_and_left extends baseChartView implements IChartView{
       server_name:user.server_name,
       theday_str:mm.format("YYYY/MM/DD")
     };
-    console.log(query);
-    qzone_collection.findOne(query,(err,result)=>{
 
+    qzone_collection.findOne(query,(err,result)=>{
+      this.query_profile(query);
       if(result && result.server_name){
         callback(true)
       }else{
@@ -70,19 +71,65 @@ class leave_and_left extends baseChartView implements IChartView{
     super(cfg);
   }
 
+  getThedayStr(mm){
+    return mm.format("YYYY/MM/DD")
+  }
+
+  getTheDayLeaveAndLeft(callback,record){
+
+    var mm = record.theday;
+    var end_day = record.end_day;
+    var query = {
+      player_action: "创建角色",
+      theday_str:this.getThedayStr(mm)
+    };
+    qzone_collection.find(query).toArray((err,results)=>{
+      this.query_profile(query);
+
+      var left_days = [];
+      var lefts = [results.length];
+      for(var theday=mm.clone().add(1,'d');theday.unix()<=end_day.unix();theday = theday.clone().add(1,'d')){
+        left_days.push(theday);
+      }
+
+
+
+      async.each(left_days,(mm,cb)=>{
+        this.getLeft(results,mm,(number)=>{
+            lefts.push(number);
+            cb();
+        });
+      },()=>{
+        this.step('get day ' + this.getThedayStr(mm) + ' left_and_leave finish');
+        console.log(lefts);
+        callback(lefts);
+      })
+
+
+    });
+  }
+
 
   public loadData(callback:(data)=>void){
     var start_day = moment('2015-07-12');
     var end_day = moment('2015-07-14');
+    start_day.unix()
 
-    qzone_collection.find({
-      player_action: "创建角色",
-      theday_str:mm.format("YYYY/MM/DD")
-    }).toArray((err,results)=>{
-
-      this.getLeft(results,mm.clone().add(1, 'd'),(number)=>{
-          callback([results.length,number]);
+    var lefts = [];
+    for(var theday=start_day;theday.unix()<=end_day.unix();theday = theday.clone().add(1,'d')){
+      lefts.push({
+        theday:theday,
+        end_day:end_day
       });
+    }
+
+    async.each(lefts,(record,cb)=>{
+      this.getTheDayLeaveAndLeft((result)=>{
+        record.result = result;
+        cb();
+      },record);
+    },()=>{
+      callback(lefts);
     });
 
   }
