@@ -36,7 +36,7 @@ function logfile2db(file,server_name){
       ob.server_name = server_name;
       ob.theday_str =  theday_str ;
       mogHelper.getQZoneLogEventCollection().insert(ob,function(err,docs){
-        profiler.step('insert on object');
+        profiler.step('insert on object ', JSON.stringify(ob));
         if(err){
           console.log(err);
         }
