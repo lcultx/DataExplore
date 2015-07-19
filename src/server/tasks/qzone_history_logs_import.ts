@@ -3,6 +3,7 @@ import LatteEventLogModel = require('../../components/data-models/LatteEventLogM
 import LocalLogDataCollector = require('../../components/collector/LocalLogDataCollector');
 import config = require('../config');
 import path = require('path');
+import async = require('async');
 
 import mogHelper = require('../../library/mogHelper');
 import moment = require('moment');
@@ -23,7 +24,7 @@ function logfile2db(file,server_name,callback){
   var nextday = mm.clone().add(1, 'd').toDate();
   console.log(theday);
   console.log(nextday);
-  var q = async.queue(function (task, callback) {
+  var q = async.queue(function (ob, callback) {
     mogHelper.getQZoneLogEventCollection().insert(ob,function(err,docs){
 
       if(err){
@@ -60,10 +61,10 @@ function logfile2db(file,server_name,callback){
 }
 
 function logfiles2db(dir,callback){
-  var q = async.queue(function (task, callback) {
+  var q = async.queue(function (task:any, callback) {
     console.log(task);
     var file = task.file;
-    var server_name = quene.server_name;
+    var server_name = task.server_name;
     logfile2db(file,server_name,function(){
       callback();
     });
@@ -81,8 +82,11 @@ function logfiles2db(dir,callback){
 
 export function dailyLogfiles2db(theday,callback){
   profiler.beginProfiling();
-  var theday_dir = path.join(config.getQZoneLatteLogsDir(),theday.format('YYYY/MM/DD'));
-  logfiles2db(theday_dir);
+  var theday_dir = <any>path.join(config.getQZoneLatteLogsDir(),theday.format('YYYY/MM/DD'));
+  logfiles2db(theday_dir,function(){
+    console.log('finish!');
+  });
+
 }
 
 function run(){
@@ -90,11 +94,11 @@ function run(){
     var theday_str = process.argv[2];
     console.log(theday_str);
     if(theday_str){
-      dailyLogfiles2db(moment(theday_str,'YYYY/MM/DD'))
+      dailyLogfiles2db(moment(theday_str,'YYYY/MM/DD'),function(){})
     }else{
       profiler.beginProfiling();
       var qlogs_dir = config.getQZoneLatteLogsDir();
-      logfiles2db(qlogs_dir);
+      logfiles2db(qlogs_dir,function(){});
     }
   });
 }
