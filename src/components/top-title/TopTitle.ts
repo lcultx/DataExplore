@@ -15,7 +15,7 @@ import ng2Helper = require('../../library/ng2Helper');
 })
 
 class TopTitle {
-
+  
 }
 
 export = TopTitle;

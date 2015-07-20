@@ -3,7 +3,7 @@
 import  express = require('express');
 import path = require('path');
 import config = require('./config');
-
+import rpcRegister = require('../components/easy-rpc/register');
 var app = express();
 
 var web_path = path.join(__dirname,'../../');
@@ -21,6 +21,7 @@ server.listen(config.port,function(){
   console.log('data-explore server is listening on port ' + config.port);
 });
 
+rpcRegister(app,path.join(__dirname,'./rpc'));
 
 var tasks = require('./tasks');
 tasks.run();
