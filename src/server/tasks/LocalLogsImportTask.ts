@@ -11,7 +11,7 @@ import fs = require('fs');
 
 import QZoneLogsImport = require('./QZoneLogsImport');
 import WanbaLogsImport = require('./WanbaLogsImport');
-class LocalLogsImportTask {
+class LocalLogsImportTask implements ITask{
 
   run(){
 
@@ -34,6 +34,9 @@ class LocalLogsImportTask {
 
   }
 
+  static getInstance(){
+    return new LocalLogsImportTask();
+  }
 
 }
 
