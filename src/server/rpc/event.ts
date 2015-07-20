@@ -4,13 +4,11 @@ import LatteEventLogModel = require('../../components/data-models/LatteEventLogM
 
 var ExecTime = require('exec-time');
 
-var getYesterdayEvents = function(req,res){
+export function getYesterdayEvents(req,res){
 
   var profiler = new ExecTime('getYesterdayEvents');
 
   profiler.beginProfiling();
-
-
 
   var hourStatusList:Array<any> = [];//分时统计
   function record(ob){
@@ -55,5 +53,3 @@ var getYesterdayEvents = function(req,res){
 
   ldCollector.run();
 }
-
-export = getYesterdayEvents;
