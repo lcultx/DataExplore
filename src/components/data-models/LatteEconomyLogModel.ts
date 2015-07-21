@@ -1,7 +1,7 @@
 /// <reference path="./interfaces.d.ts"/>
 import baseEventLogModel = require('./baseEventLogModel');
 import moment = require('moment');
-class LatteEventLogModel extends  baseEventLogModel implements IEventLogModel{
+class LatteEconomyLogModel extends  baseEventLogModel implements IEventLogModel{
 
   constructor(ob){
     super(ob);
@@ -40,10 +40,15 @@ class LatteEventLogModel extends  baseEventLogModel implements IEventLogModel{
             }
         }
 
+        var  crystal = splitList[11];
+        var gold = splitList[12];
+        var equipment_str = splitList[13];
+        var equipment = JSON.parse(equipment_str);
+
+
         var player_action = splitList[5];//"卸下装备"
 
         var request_url = splitList[6];//"/equip/upgrade?partnerIndex=0&index=2&_time=1436198398545&version=v0.0.6&sessionId=a7AB0hWxRBQJKQm4L4QplE9E"
-
 
         var user_id = splitList[8];
         var player_id = splitList[9];
@@ -52,10 +57,16 @@ class LatteEventLogModel extends  baseEventLogModel implements IEventLogModel{
           time:mm.toDate(),
           player_name:player_name,
           player_action:player_action,
+          request_url:request_url,
           user_id:user_id,
           player_id:player_id,
-          request_url:request_url
+          crystal:crystal,
+          gold:gold,
+          equipment:equipment
         };
+
+
+
         return obj;
       }else{
         return null;
@@ -79,4 +90,4 @@ class LatteEventLogModel extends  baseEventLogModel implements IEventLogModel{
   }
 }
 
-export =LatteEventLogModel;
+export = LatteEconomyLogModel;

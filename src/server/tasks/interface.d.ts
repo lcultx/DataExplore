@@ -16,6 +16,7 @@ interface ILocalLogsImport extends ITask{
   getThedayStr(file):string;
   logfile2db(file,server_name,callback);
   dailyLogfiles2db(theday,callback);
+  getCollection();
 }
 
 declare module IDailyLogs2Local {

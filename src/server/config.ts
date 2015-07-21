@@ -11,5 +11,9 @@ export function getQZoneLatteLogsDir():string{
 }
 
 export function getWanbaSDKLogsDir():string{
-  return path.join(__dirname,'../../resource/wanba_logs'); 
+  return path.join(__dirname,'../../resource/wanba_logs');
+}
+
+export function getEconomyLogsDir():string{
+  return path.join(__dirname,'../../resource/economy_logs');
 }

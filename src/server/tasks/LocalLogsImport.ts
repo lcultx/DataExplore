@@ -8,11 +8,15 @@ import mogHelper = require('../../library/mogHelper');
 import moment = require('moment');
 
 var walk = require('walk')
-var ExecTime = require('exec-time');
+
 
 class LocalLogsImport implements ILocalLogsImport{
   profiler;
 
+  getCollection(){
+    console.log('getCollection()');
+    throw Error('you are calling abstract method');
+  }
 
   run(callback?:Function){
     mogHelper.init(()=>{

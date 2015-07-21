@@ -13,6 +13,10 @@ class WanbaLogsImport extends LocalLogsImport implements ILocalLogsImport{
     this.profiler = new ExecTime('wanba_history_logs_import');
   }
 
+  getCollection(){
+    return mogHelper.getWanbaLogEventCollection();
+  }
+
   getServerName(file){
     return 'wanba_sdk_proxy'
   }
@@ -40,7 +44,7 @@ class WanbaLogsImport extends LocalLogsImport implements ILocalLogsImport{
   logfile2db(file,server_name,callback){
 
     var q = async.queue((ob, callback) =>{
-     mogHelper.getQZoneLogEventCollection().insert(ob,(err,docs)=>{
+     this.getCollection().insert(ob,(err,docs)=>{
        this.profiler.step('insert an object ');
        if(err){
          console.log(err);
@@ -52,7 +56,7 @@ class WanbaLogsImport extends LocalLogsImport implements ILocalLogsImport{
     var ldCollector = new LocalLogDataCollector();
     var theday_str = this.getThedayStr(file);
 
-    mogHelper.getQZoneLogEventCollection().remove({
+    this.getCollection().remove({
       server_name:server_name,
       theday_str:theday_str
     },{},(err,results)=>{

@@ -1,32 +1,30 @@
 /// <reference path="./interface.d.ts"/>
 import LocalLogsImport = require('./LocalLogsImport');
 import mogHelper = require('../../library/mogHelper');
-import LatteEventLogModel = require('../../components/data-models/LatteEventLogModel');
+import LatteEconomyLogModel = require('../../components/data-models/LatteEconomyLogModel');
 import LocalLogDataCollector = require('../../components/collector/LocalLogDataCollector');
 import path = require('path');
 import config = require('../config');
 var ExecTime = require('exec-time');
 import async = require('async');
-class QZoneLogsImport extends LocalLogsImport implements ILocalLogsImport{
+class EconomyLogsImport extends LocalLogsImport implements ILocalLogsImport{
 
     constructor(){
       super();
-      this.profiler = new ExecTime('qzone_history_logs_import');
+      this.profiler = new ExecTime('economy_history_logs_import');
     }
 
     getLogsDir(){
-      return config.getQZoneLatteLogsDir();
+      return config.getEconomyLogsDir();
     }
 
+    getCollection(){
+      return mogHelper.getEconomyLogCollection();
+    }
 
     getServerName(file){
       return file.split('.log')[0];
     }
-
-    getCollection(){
-      return mogHelper.getQZoneLogEventCollection();
-    }
-
 
     onFile(root, fileStats, next){
         var q = this.getReadFilesQueue();
@@ -40,7 +38,7 @@ class QZoneLogsImport extends LocalLogsImport implements ILocalLogsImport{
     }
 
     getThedayStr(file){
-      return /.*qzone_logs\/(.*)\/server*/.exec(file)[1];//2015/07/13
+      return /.*economy_logs\/(.*)\/server*/.exec(file)[1];//2015/07/13
     }
 
     logfile2db(file,server_name,callback){
@@ -58,13 +56,13 @@ class QZoneLogsImport extends LocalLogsImport implements ILocalLogsImport{
       var ldCollector = new LocalLogDataCollector();
       var theday_str = this.getThedayStr(file);
 
-      this.getCollection().remove({
+    this.getCollection().remove({
         server_name:server_name,
         theday_str:theday_str
       },{},(err,results)=>{
         this.profiler.step('delete documents');
         ldCollector.setLogURI(file);
-        ldCollector.setLogModelAsParser(new LatteEventLogModel({}));
+        ldCollector.setLogModelAsParser(new LatteEconomyLogModel({}));
         ldCollector.on('line',(ob)=>{
           ob.server_name = server_name;
           ob.theday_str =  theday_str ;
@@ -80,8 +78,8 @@ class QZoneLogsImport extends LocalLogsImport implements ILocalLogsImport{
 
 
 if(require.main === module){
-  var qzoneImport = new QZoneLogsImport();
-  qzoneImport.run();
+  var logImport = new EconomyLogsImport();
+  logImport.run();
 }
 
-export = QZoneLogsImport;
+export = EconomyLogsImport ;
