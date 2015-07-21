@@ -1,0 +1,60 @@
+
+<div class="page-sidebar nav-collapse collapse" style="height: 0px;">
+<ul class="page-sidebar-menu">
+
+  <li>
+
+    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+
+    <div class="sidebar-toggler hidden-phone"></div>
+
+    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+
+  </li>
+
+  <li>
+
+					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+
+					<form class="sidebar-search">
+
+						<div class="input-box">
+
+							<a href="javascript:;" class="remove"></a>
+
+							<input type="text" placeholder="Search...">
+
+							<input type="button" class="submit" value=" ">
+
+						</div>
+
+					</form>
+
+					<!-- END RESPONSIVE QUICK SEARCH FORM -->
+
+				</li>
+
+  <li  *ng-for="#barItem of barItems; #i = index" [class]="getClassOfItem(barItem,i)" >
+
+  	<a href="javascript:;" (click)="onItemClick(i)" >
+
+    <i [class]="getIconClassOfItem(barItem)"></i>
+
+  	<span class="title">{{barItem.title}}</span>
+    <span class="selected"></span>
+  	</a>
+
+  </li>
+
+
+</ul>
+
+<style>
+  siderbar{
+    default{
+
+    }
+  }
+</style>
+
+</div>

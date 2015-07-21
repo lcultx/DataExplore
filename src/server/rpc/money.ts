@@ -22,3 +22,7 @@ export function getTotalPayOfTheday(args,callback){
 
 
 }
+
+export function getPayCount(){
+  
+}

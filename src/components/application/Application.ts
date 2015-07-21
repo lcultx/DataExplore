@@ -5,7 +5,7 @@
 import {Component, Directive, View, Parent} from 'angular2/angular2';
 import ng2Helper = require('../../library/ng2Helper');
 import TopTitle = require('../top-title/TopTitle');
-import LeftSider = require('../left-sider/LeftSider');
+import Siderbar = require('../siderbar/Siderbar');
 import PageContent = require('../page-content/PageContent');
 
 @Component({
@@ -14,7 +14,7 @@ import PageContent = require('../page-content/PageContent');
 
 @View({
   templateUrl: ng2Helper.getTemplateUrlByComponentName('application'),
-  directives: [TopTitle,LeftSider,PageContent]
+  directives: [TopTitle,Siderbar,PageContent]
 })
 
 class Application {
