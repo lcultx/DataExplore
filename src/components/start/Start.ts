@@ -4,19 +4,18 @@
 
 import {Component, Directive, View, Parent} from 'angular2/angular2';
 import ng2Helper = require('../../library/ng2Helper');
-import DashboardStats = require('../dashboard-stats/DashboardStats');
 
 @Component({
-  selector: 'page-content'
+  selector: 'start'
 })
 
 @View({
-  templateUrl: ng2Helper.getTemplateUrlByComponentName('page-content'),
-  directives: [DashboardStats]
+  template: '<h1>Start</h1>',
+  directives: []
 })
 
-class PageContent {
+class Start{
 
 }
 
-export = PageContent;
+export = Start;
