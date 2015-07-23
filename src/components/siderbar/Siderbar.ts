@@ -29,22 +29,24 @@ class Siderbar {
     this.router = router;
     this.router.config([
         {path:'', component: Dashboard},
-        {path:'#/start', component: Start,as:'start'},
-        {path:'#/login-data',component:LoginData, as:'login-data'}
+        {path:'/start', component: Start,as:'start'},
+        {path:'/login-data',component:LoginData, as:'login-data'}
     ]);
 
     this.barItems = [
       {
         title:'Dashboard',
-        link:"['/dashboard']",
+        link:"",
         icon:'icon-home',
-        active:true
+        active:false
       },{
         title:'登录数据',
-        link:"['/login-data']",
-        icon:'icon-user'
+        link:"/login-data",
+        icon:'icon-user',
+        active:true
       },{
         title:'付费数据',
+        link:"/start",
         icon:'icon-file-text'
       },{
         title:'消耗数据',
@@ -63,7 +65,9 @@ class Siderbar {
   }
 
   getClassOfItem(item,i:number){
-    if(i== this.nowActiveIndex){
+
+    if(item.active){
+      this.nowActiveIndex = i;
       return 'active';
     }else{
       return 'default';
@@ -79,8 +83,11 @@ class Siderbar {
     this.nowActiveIndex = i;
     console.log(this.router);
     this.barItems[this.nowActiveIndex].active = true;
-
-    this.router.navigate("['/start']");
+    var url = this.barItems[i].link || '';
+    console.log(url);
+    this.router.navigate(url).then(()=>{
+      console.log('finish!');
+    });
   }
 
 

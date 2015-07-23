@@ -148,6 +148,9 @@ class gender_pay_contrast extends baseChartView implements IChartView{
   }
 
   public getChartOptions(data):any{
+
+    console.log(data);
+
     var timeList = this.getXAxisData();
     var option = this.option;
     option.xAxis[0].data = timeList;
