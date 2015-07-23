@@ -32,6 +32,7 @@
         "./src/components/data-models/interfaces.d.ts",
         "./src/components/easy-rpc/index.ts",
         "./src/components/easy-rpc/register.ts",
+        "./src/components/login-data/LoginData.ts",
         "./src/components/shower/SimpleChart.ts",
         "./src/components/shower/SimpleChartLoader.ts",
         "./src/components/shower/YesterdayEventShower.ts",

@@ -34,17 +34,20 @@
 
 				</li>
 
-  <li  *ng-for="#barItem of barItems; #i = index" [class]="getClassOfItem(barItem,i)" >
+        <li  *ng-for="#barItem of barItems; #i = index" [class]="getClassOfItem(barItem,i)" >
 
-  	<a href="javascript:;" (click)="onItemClick(i)" >
+        	<a href="javascript:;" (click)="onItemClick(i)" >
 
-    <i [class]="getIconClassOfItem(barItem)"></i>
+          <i [class]="getIconClassOfItem(barItem)"></i>
 
-  	<span class="title">{{barItem.title}}</span>
-    <span class="selected"></span>
-  	</a>
+        	<span class="title">{{barItem.title}}</span>
 
-  </li>
+          <span class="selected"></span>
+
+        	</a>
+        </li>
+
+
 
 
 </ul>

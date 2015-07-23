@@ -37,6 +37,9 @@ declare module "angular2/router"{
   var RouteConfig:any;
   var RouterOutlet:any;
   var RouterLink:any;
+  class Router{
+    
+  }
 }
 
 

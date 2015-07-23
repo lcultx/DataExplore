@@ -9,9 +9,9 @@ import router = require('angular2/router');
 import ng2Helper = require('../../library/ng2Helper');
 import TopTitle = require('../top-title/TopTitle');
 import Siderbar = require('../siderbar/Siderbar');
-import PageContent = require('../page-content/PageContent');
 import Start = require('../start/Start');
 import Dashboard = require('../dashboard/Dashboard');
+import LoginData = require('../login-data/LoginData');
 
 @Component({
   selector: 'application'
@@ -19,7 +19,7 @@ import Dashboard = require('../dashboard/Dashboard');
 
 @View({
   templateUrl: ng2Helper.getTemplateUrlByComponentName('application'),
-  directives: [TopTitle,Siderbar,PageContent,router.RouterOutlet,router.RouterLink],
+  directives: [TopTitle,Siderbar,router.RouterOutlet,router.RouterLink],
 //   template: `
 //     <nav>
 //     <ul>
@@ -32,10 +32,7 @@ import Dashboard = require('../dashboard/Dashboard');
 //   `
 })
 
-@router.RouteConfig([
-  {path:'', component: Dashboard},
-  { path: '#/start', component: Start, as:'start' }
-])
+
 
 class Application {
 
