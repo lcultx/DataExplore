@@ -1,6 +1,12 @@
 import mogHelper = require('../../library/mogHelper');
 import querystring = require('querystring');
 import shuijing = require('../shuijing_config');
+
+
+import helper = require('../../library/helper');
+var ExecTime = require('exec-time');
+var profiler =  new ExecTime('user');
+
 var wanba_collection = mogHelper.getWanbaLogEventCollection();
 export function getTotalPayOfTheday(args,callback){
 
@@ -8,7 +14,7 @@ export function getTotalPayOfTheday(args,callback){
   wanba_collection.find({
     'data.req':/buy_playzone_item/,
     'data.res.code':0,
-    'theday_str':args.theday
+    'theday_str':args.theday_str
   }).toArray(function(err,results){
 
     for(var i=0;i<results.length;i++){
@@ -17,12 +23,18 @@ export function getTotalPayOfTheday(args,callback){
       var good = shuijing.getGoodByItemId(url_parts.itemid);
       all_pay_money += good.price;
     }
-    callback(all_pay_money);
+    callback(all_pay_money/10);
   });
 
 
 }
 
+export function getYesterdayAddCount(args,callback){
+  getTotalPayOfTheday({theday_str:helper.getYesterdayStr()},(money)=>{
+    callback(money);
+  });
+}
+
 export function getPayCount(){
-  
+
 }

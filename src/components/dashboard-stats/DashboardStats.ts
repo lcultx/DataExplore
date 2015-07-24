@@ -5,6 +5,7 @@
 import {Component, Directive, View, Parent} from 'angular2/angular2';
 import ng2Helper = require('../../library/ng2Helper');
 import rpc = require('../easy-rpc/index');
+
 @Component({
   selector: 'dashboard-stats'
 })
@@ -17,14 +18,23 @@ import rpc = require('../easy-rpc/index');
 class DashboardStats {
   userAddNumber:number = null;
   moneyAddNumber:number = null;
+  leaveAndLeftPercent:number = null;
   constructor(){
-    this.getDashboardStats();
-  }
-  private getDashboardStats(callback?:Function){
-    rpc.call('money.getTotalPayOfTheday',{theday:'2015/07/18'},(money)=>{
+
+    rpc.call('money.getYesterdayAddCount',{},(money)=>{
       this.moneyAddNumber = money;
     });
+
+    rpc.call('user.getYesterdayAddCount',{},(count)=>{
+      this.userAddNumber = count;
+    });
+
+    rpc.call('user.getLeastLeaveAndLeft',{},(percent)=>{
+      this.leaveAndLeftPercent = Math.round(percent * 10000)/100;
+    })
+
   }
+
 }
 
 export = DashboardStats;

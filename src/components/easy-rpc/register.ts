@@ -1,4 +1,5 @@
 import path = require('path');
+
 export = function(app,rpc_path){
   console.log('rpc_path',rpc_path);
   app.get('/api/rpc',function(req,res){
@@ -11,6 +12,8 @@ export = function(app,rpc_path){
     console.log(file);
     var _module =  null;
     try{
+
+
       _module  = require(file);
       _module[method](args,function(data){
         res.json(data);

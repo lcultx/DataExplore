@@ -5,14 +5,14 @@
 import {Component, Directive, View, Parent} from 'angular2/angular2';
 import ng2Helper = require('../../library/ng2Helper');
 import DashboardStats = require('../dashboard-stats/DashboardStats');
-
+import YesterdayPayChart = require('../yesterday-pay-chart/YesterdayPayChart');
 @Component({
   selector: 'dashboard'
 })
 
 @View({
   templateUrl: ng2Helper.getTemplateUrlByComponentName('dashboard'),
-  directives: [DashboardStats]
+  directives: [DashboardStats,YesterdayPayChart]
 })
 
 class Dashboard {
