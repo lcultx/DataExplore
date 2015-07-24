@@ -6,16 +6,16 @@ import {Component, Directive, View, Parent} from 'angular2/angular2';
 import ng2Helper = require('../../library/ng2Helper');
 
 @Component({
-  selector: 'yesterday-useradd-chart'
+  selector: 'yesterday-economy-chart'
 })
 
 @View({
-  templateUrl: ng2Helper.getTemplateUrlByComponentName('yesterday-useradd-chart'),
+  templateUrl: ng2Helper.getTemplateUrlByComponentName('yesterday-economy-chart'),
   directives: []
 })
 
-class YesterdayUserAddChart {
+class YesterdayEconomyChart {
 
 }
 
-export = YesterdayUserAddChart;
+export = YesterdayEconomyChart;
