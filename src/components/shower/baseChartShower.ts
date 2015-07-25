@@ -18,8 +18,6 @@ class baseChartShower implements IChartShower{
   constructor(viewContrainer:angular2.ViewContainerRef){
     this.parent = ng2Helper.getParentFromViewContainer(viewContrainer);
     this.$elem = ng2Helper.getJQueryElementFromViewContainer(viewContrainer);
-
-    this.parent.addShower(this);
   }
 
   setChartOption(option:any){
