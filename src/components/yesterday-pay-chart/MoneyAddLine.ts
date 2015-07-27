@@ -7,7 +7,7 @@ import ng2Helper = require('../../library/ng2Helper');
 import rpc = require('../easy-rpc/index');
 var echarts = require('echarts').echarts;
 
-var selectorName = 'yesterday-pay-chart';
+var selectorName = 'money-add-line';
 
 @Component({
   selector: selectorName
@@ -27,7 +27,7 @@ class YesterdayPayChart {
   option = {
       padding: 500,
       title : {
-          text: '昨日充值详情-充值次数',
+          text: '昨日充值详情-充值金额',
           subtext: ''
       },
       tooltip : {
@@ -51,7 +51,7 @@ class YesterdayPayChart {
           {
               type : 'value',
               axisLabel : {
-                  formatter: '{value} 次'
+                  formatter: '{value} 元'
               }
           }
       ],
@@ -81,7 +81,7 @@ class YesterdayPayChart {
       for(var i=0;i<24;i++){
         this.option.xAxis[0].data.push(i);
         if(data[i]){
-          this.option.series[0].data.push(data[i].number);
+          this.option.series[0].data.push(data[i].money);
         }else{
           this.option.series[0].data.push(0);
         }

@@ -8,7 +8,7 @@ import router2 = require('angular2/router');
 import Start = require('../start/Start');
 import Dashboard = require('../dashboard/Dashboard');
 import LoginData = require('../login-data/LoginData');
-
+import PayData = require('../pay-data/PayData');
 
 
 @Component({
@@ -28,9 +28,10 @@ class Siderbar {
   constructor(router:router2.Router){
     this.router = router;
     this.router.config([
-        {path:'', component: Dashboard},
-        {path:'/start', component: Start,as:'start'},
-        {path:'/login-data',component:LoginData, as:'login-data'}
+         {path:'', component: Dashboard} 
+        ,{path:'/start', component: Start,as:'start'}
+        ,{path:'/login-data',component:LoginData, as:'login-data'}
+        ,{path:'/pay-data',component:PayData,as:'pay-data'}
     ]);
 
     this.barItems = [
@@ -46,7 +47,7 @@ class Siderbar {
         active:true
       },{
         title:'付费数据',
-        link:"/start",
+        link:"/pay-data",
         icon:'icon-file-text'
       },{
         title:'消耗数据',
