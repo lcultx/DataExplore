@@ -35,7 +35,7 @@ class YesterdayPayChart {
       },
       calculable : true,
       grid:{
-        x:'40px',
+        x:'50px',
         y:'50px',
         x2:'40px',
         y2:'30px'

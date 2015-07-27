@@ -35,7 +35,7 @@ class YesterdayPayChart {
       },
       calculable : true,
       grid:{
-        x:'40px',
+        x:'50px',
         y:'50px',
         x2:'40px',
         y2:'30px'
@@ -81,7 +81,7 @@ class YesterdayPayChart {
       for(var i=0;i<24;i++){
         this.option.xAxis[0].data.push(i);
         if(data[i]){
-          this.option.series[0].data.push(data[i].money);
+          this.option.series[0].data.push(data[i].money/10);
         }else{
           this.option.series[0].data.push(0);
         }
