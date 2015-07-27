@@ -30,6 +30,7 @@
         "./src/components/data-models/LatteEventLogModel.ts",
         "./src/components/data-models/baseEventLogModel.ts",
         "./src/components/data-models/interfaces.d.ts",
+        "./src/components/datepicker/DatePicker.ts",
         "./src/components/easy-rpc/index.ts",
         "./src/components/easy-rpc/register.ts",
         "./src/components/login-data/LoginData.ts",

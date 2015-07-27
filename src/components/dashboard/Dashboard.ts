@@ -8,14 +8,14 @@ import DashboardStats = require('../dashboard-stats/DashboardStats');
 import YesterdayPayChart = require('../yesterday-pay-chart/YesterdayPayChart');
 import YesterdayUseraddChart = require('../yesterday-useradd-chart/YesterdayUseraddChart');
 import YeserdayEconomyChart = require('../yesterday-economy-chart/YesterdayEconomyChart');
-
+import DatePicker = require('../datepicker/DatePicker');
 @Component({
   selector: 'dashboard'
 })
 
 @View({
   templateUrl: ng2Helper.getTemplateUrlByComponentName('dashboard'),
-  directives: [DashboardStats,YesterdayPayChart,YesterdayUseraddChart,YeserdayEconomyChart]
+  directives: [DashboardStats,YesterdayPayChart,YesterdayUseraddChart,YeserdayEconomyChart,DatePicker]
 })
 
 class Dashboard {
