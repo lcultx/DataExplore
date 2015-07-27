@@ -52,6 +52,7 @@
         "./src/library/helper.ts",
         "./src/library/mogHelper.ts",
         "./src/library/ng2Helper.ts",
+        "./src/router_config.ts",
         "./src/server/config.ts",
         "./src/server/main.ts",
         "./src/server/rpc/event.ts",

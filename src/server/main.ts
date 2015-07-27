@@ -5,12 +5,23 @@ import path = require('path');
 import config = require('./config');
 import rpcRegister = require('../components/easy-rpc/register');
 import mogHelper = require('../library/mogHelper');
-
+import router_config = require('../router_config');
 
 var app = express();
 
+
+
 var web_path = path.join(__dirname,'../../');
 console.log(web_path);
+
+var index = path.join(web_path,'index.html');
+for(var i in router_config){
+  var router = router_config[i];
+  app.get(router.path,(req,res)=>{
+    res.sendfile(index);
+  })
+}
+
 app.use(express.static(web_path));
 
 var views = require('./views');

@@ -125,11 +125,13 @@ class PayTypeLine {
 
       var $andorid_chart = $('<div>');
       $andorid_chart.css({height:340});
+      $(selectorName).find('#chart1').html('');
       $(selectorName).find('#chart1').append($andorid_chart);
       echarts.init($andorid_chart[0]).setOption(android_chart_config);
 
       var $ios_chart = $('<div>');
       $ios_chart.css({height:340});
+      $(selectorName).find('#chart2').html('');
       $(selectorName).find('#chart2').append($ios_chart);
       echarts.init($ios_chart[0]).setOption(ios_chart_config);
 
