@@ -28,7 +28,7 @@ class Siderbar {
   constructor(router:router2.Router){
     this.router = router;
     this.router.config([
-         {path:'', component: Dashboard}
+         {path:'/', component: Dashboard}
         ,{path:'/start', component: Start,as:'start'}
         ,{path:'/login-data',component:LoginData, as:'login-data'}
         ,{path:'/pay-data',component:PayData,as:'pay-data'}

@@ -18,7 +18,7 @@ var index = path.join(web_path,'index.html');
 for(var i in router_config){
   var router = router_config[i];
   app.get(router.path,(req,res)=>{
-    res.sendfile(index);
+    res.sendFile(index);
   })
 }
 
