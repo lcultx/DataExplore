@@ -68,3 +68,53 @@ export function getYesterdayPayStatusWithTimeline(args,callback){
       callback(record);
   });
 }
+
+export function getYesterdayPayStatusWithType(args,callback){
+
+  var all:any = {};
+  var servers:any = {};
+  getPayEventsOfTheday({theday_str:helper.getYesterdayStr()},(events)=>{
+      profiler.step('recvice request');
+      for(var i in events){
+        var ob = events[i];
+
+        var hour = new Date(ob.time).getHours();
+        console.log(hour);
+
+        var url_parts = querystring.parse(ob.data.req);
+        var itemid = url_parts.itemid;
+        var good = shuijing.getGoodByItemId(url_parts.itemid);
+        if(all[itemid]){
+          all[itemid].number += 1;
+          all[itemid].money += good.price;
+        }else{
+          all[itemid] = {
+            number:1,
+            money:good.price,
+            name:good.desc
+          }
+        }
+
+
+        if(!servers[good.zoneid]){
+          servers[good.zoneid]={};
+        }
+        if(servers[good.zoneid][good.itemid]){
+          servers[good.zoneid][good.itemid].number += 1;
+          servers[good.zoneid][good.itemid].money += good.price;
+        }else{
+          servers[good.zoneid][good.itemid] = {
+            number:1,
+            money:good.price,
+            name:good.desc
+          }
+        }
+
+      }
+
+      callback({
+        all:all,
+        servers:servers
+      });
+  });
+}

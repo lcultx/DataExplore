@@ -22,13 +22,13 @@ var selectorName = 'money-add-line';
   directives: []
 })
 
-class YesterdayPayChart {
+class MoneyAddLine {
 
   option = {
-      padding: 500,
+
       title : {
-          text: '昨日充值详情-充值金额',
-          subtext: ''
+          text: '充值行为时间分布',
+          subtext: '金额'
       },
       tooltip : {
           trigger: 'axis'
@@ -57,27 +57,16 @@ class YesterdayPayChart {
       ],
       series : [
           {
-              name:'充值次数',
+              name:'充值金额',
               type:'line',
-              data:[],
-              markPoint : {
-                  data : [
-                      {type : 'max', name: '最大值'},
-                      {type : 'min', name: '最小值'}
-                  ]
-              },
-              markLine : {
-                  data : [
-                      {type : 'average', name: '平均值'}
-                  ]
-              }
+              data:[]
           }
       ]
   };
 
   constructor(){
     rpc.call('money.getYesterdayPayStatusWithTimeline',{},(data)=>{
-      console.log(data);
+
       for(var i=0;i<24;i++){
         this.option.xAxis[0].data.push(i);
         if(data[i]){
@@ -98,4 +87,4 @@ class YesterdayPayChart {
   }
 }
 
-export = YesterdayPayChart;
+export = MoneyAddLine;

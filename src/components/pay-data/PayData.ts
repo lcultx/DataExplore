@@ -7,13 +7,14 @@ import ng2Helper = require('../../library/ng2Helper');
 import DashboardStats = require('../dashboard-stats/DashboardStats');
 import YesterdayPayChart = require('../yesterday-pay-chart/YesterdayPayChart');
 import MoneyAddLine = require('../yesterday-pay-chart/MoneyAddLine');
+import PayTypeLine = require('../yesterday-pay-chart/PayTypeLine');
 @Component({
   selector: 'pay-data'
 })
 
 @View({
   templateUrl: ng2Helper.getTemplateUrlByComponentName('pay-data'),
-  directives: [DashboardStats,YesterdayPayChart,MoneyAddLine]
+  directives: [DashboardStats,YesterdayPayChart,MoneyAddLine,PayTypeLine]
 })
 
 class PayData{

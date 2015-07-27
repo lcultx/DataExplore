@@ -44,6 +44,8 @@
         "./src/components/top-title/TopTitle.ts",
         "./src/components/yesterday-economy-chart/YesterdayEconomyChart.ts",
         "./src/components/yesterday-pay-chart/MoneyAddLine.ts",
+        "./src/components/yesterday-pay-chart/PayTypeLine.ts",
+        "./src/components/yesterday-pay-chart/PayTypeMoneyAddLine.ts",
         "./src/components/yesterday-pay-chart/YesterdayPayChart.ts",
         "./src/components/yesterday-useradd-chart/YesterdayUseraddChart.ts",
         "./src/index.ts",
