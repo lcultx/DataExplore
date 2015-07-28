@@ -17,3 +17,9 @@ export function getWanbaSDKLogsDir():string{
 export function getEconomyLogsDir():string{
   return path.join(__dirname,'../../resource/economy_logs');
 }
+
+export var routers = [
+     {path:'', component: 'Dashboard'}
+    ,{path:'/login-data',component:'LoginData', as:'login-data'}
+    ,{path:'/pay-data',component:'PayData',as:'pay-data'}
+]

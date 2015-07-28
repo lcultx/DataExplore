@@ -16,6 +16,9 @@
     },
     "async/async.d.ts": {
       "commit": "286c198898978cb6045076c3e47f823a02217b41"
+    },
+    "eventemitter3/eventemitter3.d.ts": {
+      "commit": "957f67316813592e870ba5c82e0f1e780826fefc"
     }
   }
 }

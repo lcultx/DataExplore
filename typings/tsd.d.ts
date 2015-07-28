@@ -8,3 +8,4 @@
 /// <reference path="moment/moment-node.d.ts" />
 /// <reference path="later/later.d.ts" />
 /// <reference path="async/async.d.ts" />
+/// <reference path="eventemitter3/eventemitter3.d.ts" />

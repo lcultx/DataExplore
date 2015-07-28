@@ -1,18 +1,18 @@
 /// <reference path="../../../typings/angular2/angular2.d.ts"/>
 /// <reference path="../../../typings/jquery/jquery.d.ts"/>
-
+/// <reference path="../../../typings/eventemitter3/eventemitter3.d.ts"/>
 
 import {Component, Directive, View, Parent} from 'angular2/angular2';
+import angular2 = require('angular2/angular2');
 import ng2Helper = require('../../library/ng2Helper');
 import moment = require('moment');
+import EventEmitter = require('eventemitter3');
 @Component({
   selector: 'datepicker'
 })
 
 @View({
   template: `
-
-
   <div id="reportrange" class="pull-right"
     style="
       background: #fff;
@@ -27,31 +27,54 @@ import moment = require('moment');
       <span></span> <b class="caret"></b>
   </div>
 
+
+  <style>
+  .daterangepicker .table-condensed th,.daterangepicker  .table-condensed td{
+    padding: 0px 0px;
+  }
+
+  .daterangepicker .daterangepicker_input input{
+    width:200px;
+  }
+  </style>
+
   `,
   directives: []
 })
 
-class Datepicker {
-  constructor(){
-    $(function() {
+class Datepicker extends EventEmitter{
+  parent:IContainer;
+  constructor(viewContrainer:angular2.ViewContainerRef){
+    super();
 
-    function cb(start, end) {
-        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-    }
-    cb(moment().subtract(29, 'days'), moment());
+    this.parent = ng2Helper.getParentFromViewContainer(viewContrainer);
 
-    (<any>$('#reportrange')).daterangepicker({
-        ranges: {
-           'Today': [moment(), moment()],
-           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-           'This Month': [moment().startOf('month'), moment().endOf('month')],
-           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        }
-    }, cb);
+    $(() =>{
 
-});
+      function cb(start, end) {
+          $('#reportrange span').html(start.format('YYYY/MM/DD') + ' - ' + end.format('YYYY/MM/DD'));
+
+      }
+      cb(moment().subtract(29, 'days'), moment());
+
+      (<any>$('#reportrange')).daterangepicker({
+          locale: {
+              format: 'YYYY/MM/DD'
+          },
+          ranges: {
+             'Today': [moment(), moment()],
+             'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+             'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+             'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+             'This Month': [moment().startOf('month'), moment().endOf('month')],
+             'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          }
+      }, (start,end)=>{
+        cb(start,end);
+        this.emit('change',{start:start,end:end});
+      });
+
+    });
   }
 }
 

@@ -1,6 +1,6 @@
 
-/// <reference path="../../typings/angular2/angular2.d.ts"/>
-/// <reference path="../../typings/jquery/jquery.d.ts"/>
+/// <reference path="../../../typings/angular2/angular2.d.ts"/>
+/// <reference path="../../../typings/jquery/jquery.d.ts"/>
 
 import angular2 = require('angular2/angular2');
 //因为issue1831 parent无法直接注入到子类，但可以通过辅助方法由viewContrainer取出

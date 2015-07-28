@@ -5,7 +5,7 @@ import path = require('path');
 import config = require('./config');
 import rpcRegister = require('../components/easy-rpc/register');
 import mogHelper = require('../library/mogHelper');
-import router_config = require('../router_config');
+var router_config = config.routers;
 
 var app = express();
 
