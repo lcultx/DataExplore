@@ -5,7 +5,7 @@ import config = require('../config');
 import mogHelper = require('../lib/mogHelper');
 import async = require('async');
 var ExecTime = require('exec-time');
-import LocalLogDataCollector = require('../../components/collector/LocalLogDataCollector');
+import LocalLogDataCollector = require('../lib/collector/LocalLogDataCollector');
 class WanbaLogsImport extends LocalLogsImport implements ILocalLogsImport{
 
   constructor(){

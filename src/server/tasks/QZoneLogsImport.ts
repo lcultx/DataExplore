@@ -1,8 +1,8 @@
 /// <reference path="./interface.d.ts"/>
 import LocalLogsImport = require('./LocalLogsImport');
 import mogHelper = require('../lib/mogHelper');
-import LatteEventLogModel = require('../../components/data-models/LatteEventLogModel');
-import LocalLogDataCollector = require('../../components/collector/LocalLogDataCollector');
+import LatteEventLogModel = require('../lib/data-models/LatteEventLogModel');
+import LocalLogDataCollector = require('../lib/collector/LocalLogDataCollector');
 import path = require('path');
 import config = require('../config');
 var ExecTime = require('exec-time');

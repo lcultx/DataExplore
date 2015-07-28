@@ -1,6 +1,6 @@
-/// <reference path="../../components/collector/interfaces.d.ts"/>
-import LocalLogDataCollector = require('../../components/collector/LocalLogDataCollector')
-import LatteEventLogModel = require('../../components/data-models/LatteEventLogModel');
+/// <reference path="../lib/collector/interfaces.d.ts"/>
+import LocalLogDataCollector = require('../lib/collector/LocalLogDataCollector')
+import LatteEventLogModel = require('../lib/data-models/LatteEventLogModel');
 
 var ExecTime = require('exec-time');
 
