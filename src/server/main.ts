@@ -1,10 +1,9 @@
- /// <reference path="../../typings/express/express.d.ts"/>
- /// <reference path="../../typings/node/node.d.ts"/>
+/// <reference path="./tsd.d.ts"/>
 import  express = require('express');
 import path = require('path');
 import config = require('./config');
 import rpcRegister = require('../components/easy-rpc/register');
-import mogHelper = require('../library/mogHelper');
+import mogHelper = require('./lib/mogHelper');
 var router_config = config.routers;
 
 var app = express();
@@ -23,9 +22,6 @@ for(var i in router_config){
 }
 
 app.use(express.static(web_path));
-
-var views = require('./views');
-views.loadViews(app);
 
 var server = require('http').Server(app);
 server.listen(config.port,function(){

@@ -1,9 +1,9 @@
-import mogHelper = require('../../library/mogHelper');
+import mogHelper = require('../lib/mogHelper');
 import querystring = require('querystring');
-import shuijing = require('../shuijing_config');
+import shuijing = require('../../share/configs/shuijing');
 
 
-import helper = require('../../library/helper');
+import helper = require('../../share/helper');
 var ExecTime = require('exec-time');
 var profiler =  new ExecTime('money');
 profiler.beginProfiling();

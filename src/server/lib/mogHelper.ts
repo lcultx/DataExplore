@@ -1,5 +1,4 @@
 
-/// <reference path="../../typings/mongodb/mongodb.d.ts"/>
 import mongodb = require('mongodb');
 
 var wanbaCollection:mongodb.Collection;

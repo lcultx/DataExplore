@@ -4,7 +4,7 @@ import config = require('../config');
 import path = require('path');
 import async = require('async');
 
-import mogHelper = require('../../library/mogHelper');
+import mogHelper = require('../lib/mogHelper');
 import moment = require('moment');
 
 var walk = require('walk')

@@ -3,9 +3,8 @@
 
 
 import {Component, Directive, View, Parent,NgFor,CSSClass} from 'angular2/angular2';
-import ng2Helper = require('../../library/ng2Helper');
+import ng2Helper = require('../ng2-library/ng2Helper');
 import router2 = require('angular2/router');
-import Start = require('../start/Start');
 import Dashboard = require('../dashboard/Dashboard');
 import LoginData = require('../login-data/LoginData');
 import PayData = require('../pay-data/PayData');
@@ -29,7 +28,6 @@ class Siderbar {
     this.router = router;
     this.router.config([
          {path:'/', component: Dashboard}
-        ,{path:'/start', component: Start,as:'start'}
         ,{path:'/login-data',component:LoginData, as:'login-data'}
         ,{path:'/pay-data',component:PayData,as:'pay-data'}
     ]);

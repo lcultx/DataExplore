@@ -1,6 +1,6 @@
 /// <reference path="./interface.d.ts"/>
 import LocalLogsImport = require('./LocalLogsImport');
-import mogHelper = require('../../library/mogHelper');
+import mogHelper = require('../lib/mogHelper');
 import LatteEconomyLogModel = require('../../components/data-models/LatteEconomyLogModel');
 import LocalLogDataCollector = require('../../components/collector/LocalLogDataCollector');
 import path = require('path');

@@ -3,7 +3,7 @@
 
 
 import {Component, Directive, View, Parent} from 'angular2/angular2';
-import ng2Helper = require('../../library/ng2Helper');
+import ng2Helper = require('../ng2-library/ng2Helper');
 import rpc = require('../easy-rpc/index');
 
 @Component({

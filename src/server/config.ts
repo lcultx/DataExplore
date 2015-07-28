@@ -1,4 +1,3 @@
-/// <reference path="../../typings/node/node.d.ts"/>
 
 import path = require('path');
 

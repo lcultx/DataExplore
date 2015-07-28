@@ -1,9 +1,10 @@
-import mogHelper = require('../../library/mogHelper');
+
+import mogHelper = require('../lib/mogHelper');
 
 import moment = require('moment');
 var qzone_collection = mogHelper.getQZoneLogEventCollection();
 
-import helper = require('../../library/helper');
+import helper = require('../../share/helper');
 var ExecTime = require('exec-time');
 var profiler =  new ExecTime('user');
 

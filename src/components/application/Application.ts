@@ -6,10 +6,9 @@ import {Component, Directive, View, Parent} from 'angular2/angular2';
 import router = require('angular2/router');
 
 
-import ng2Helper = require('../../library/ng2Helper');
+import ng2Helper = require('../ng2-library/ng2Helper');
 import TopTitle = require('../top-title/TopTitle');
 import Siderbar = require('../siderbar/Siderbar');
-import Start = require('../start/Start');
 import Dashboard = require('../dashboard/Dashboard');
 import LoginData = require('../login-data/LoginData');
 
