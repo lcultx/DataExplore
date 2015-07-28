@@ -1,3 +1,4 @@
+/// <reference path="./tsd.d.ts"/>
 import {bootstrap} from 'angular2/angular2';
 import router = require('angular2/router');
 

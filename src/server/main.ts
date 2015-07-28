@@ -1,4 +1,3 @@
-/// <reference path="./tsd.d.ts"/>
 import  express = require('express');
 import path = require('path');
 import config = require('./config');

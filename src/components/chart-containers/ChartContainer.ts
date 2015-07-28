@@ -1,4 +1,9 @@
-/// <reference path="../../share/interfaces.d.ts"/>
-class ChartContrainer{
+class ChartContainer {
   charts:Array<IChart>;
+
+  addChart(chart:IChart){
+    this.charts.push(chart);
+  }
 }
+
+export = ChartContainer;
