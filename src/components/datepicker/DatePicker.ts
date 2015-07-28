@@ -1,7 +1,4 @@
-/// <reference path="../../../typings/angular2/angular2.d.ts"/>
-/// <reference path="../../../typings/jquery/jquery.d.ts"/>
-/// <reference path="../../../typings/eventemitter3/eventemitter3.d.ts"/>
-
+/// <reference path="../chart-containers/interface"/>
 import {Component, Directive, View, Parent} from 'angular2/angular2';
 import angular2 = require('angular2/angular2');
 import ng2Helper = require('../ng2-library/ng2Helper');
@@ -43,11 +40,13 @@ import EventEmitter = require('eventemitter3');
 })
 
 class Datepicker extends EventEmitter{
-  parent:IContainer;
+  parent:IChartContainer;
   constructor(viewContrainer:angular2.ViewContainerRef){
     super();
 
     this.parent = ng2Helper.getParentFromViewContainer(viewContrainer);
+
+    this.parent.setDatePicker(this);
 
     $(() =>{
 

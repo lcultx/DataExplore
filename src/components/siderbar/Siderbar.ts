@@ -1,15 +1,12 @@
-/// <reference path="../../../typings/angular2/angular2.d.ts"/>
-/// <reference path="../../../typings/jquery/jquery.d.ts"/>
-
-
 import {Component, Directive, View, Parent,NgFor,CSSClass} from 'angular2/angular2';
 import ng2Helper = require('../ng2-library/ng2Helper');
 import router2 = require('angular2/router');
-import Dashboard = require('../dashboard/Dashboard');
-import LoginData = require('../login-data/LoginData');
-import PayData = require('../pay-data/PayData');
 
+import Dashboard = require('../chart-containers/Dashborad');
+import LoginDataView = require('../chart-containers/LoginDataView');
+import PayDataView = require('../chart-containers/PayDataView');
 
+ 
 @Component({
   selector: 'siderbar'
 })
@@ -28,8 +25,8 @@ class Siderbar {
     this.router = router;
     this.router.config([
          {path:'/', component: Dashboard}
-        ,{path:'/login-data',component:LoginData, as:'login-data'}
-        ,{path:'/pay-data',component:PayData,as:'pay-data'}
+        ,{path:'/login-data',component:LoginDataView, as:'login-data'}
+        ,{path:'/pay-data',component:PayDataView,as:'pay-data'}
     ]);
 
     this.barItems = [

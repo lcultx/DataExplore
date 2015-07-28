@@ -10,11 +10,3 @@
 /// <reference path="../typings/later/later.d.ts" />
 /// <reference path="../typings/async/async.d.ts" />
 /// <reference path="../typings/eventemitter3/eventemitter3.d.ts" />
-
-interface IContainer{
-  children:Array<any>;
-}
-
-interface IChart{
-
-}

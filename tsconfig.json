@@ -19,15 +19,18 @@
     ],
     "files": [
         "./src/components/application/Application.ts",
-        "./src/components/chart-containers/ChartContainer.ts",
         "./src/components/chart-containers/Dashborad.ts",
+        "./src/components/chart-containers/LoginDataView.ts",
+        "./src/components/chart-containers/PayDataView.ts",
+        "./src/components/chart-containers/_ChartContainer.ts",
+        "./src/components/chart-containers/interface.ts",
+        "./src/components/charts/interface.ts",
         "./src/components/collector/LocalLogDataCollector.ts",
         "./src/components/collector/RemoteLogDataCollector.ts",
         "./src/components/collector/StreamHelper.ts",
         "./src/components/collector/interfaces.d.ts",
         "./src/components/collector/test.ts",
         "./src/components/dashboard-stats/DashboardStats.ts",
-        "./src/components/dashboard/Dashboard.ts",
         "./src/components/data-models/LatteEconomyLogModel.ts",
         "./src/components/data-models/LatteEventLogModel.ts",
         "./src/components/data-models/baseEventLogModel.ts",
@@ -35,9 +38,7 @@
         "./src/components/datepicker/DatePicker.ts",
         "./src/components/easy-rpc/index.ts",
         "./src/components/easy-rpc/register.ts",
-        "./src/components/login-data/LoginData.ts",
         "./src/components/ng2-library/ng2Helper.ts",
-        "./src/components/pay-data/PayData.ts",
         "./src/components/shower/SimpleChart.ts",
         "./src/components/shower/SimpleChartLoader.ts",
         "./src/components/shower/YesterdayEventShower.ts",
@@ -72,7 +73,6 @@
         "./src/server/tasks/interface.d.ts",
         "./src/share/configs/shuijing.ts",
         "./src/share/helper.ts",
-        "./src/share/interfaces.d.ts",
         "./src/tsd.d.ts"
     ]
 }
