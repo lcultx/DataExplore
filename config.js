@@ -8,6 +8,7 @@ System.config({
     "moment":"./resource/lib/moment.js",
     "angular2/src/*":"library/null.js",
     "echarts":"./resource/lib/echarts-2.2.4/build/dist/echarts-all.js",
-    "eventemitter3":'./node_modules/eventemitter3/index.js'
+    "eventemitter3":'./node_modules/eventemitter3/index.js',
+    "querystring":'./node_modules/qs/index.js'
     }
 });
