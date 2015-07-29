@@ -6,6 +6,7 @@ import {Component, Directive, View, Parent} from 'angular2/angular2';
 import angular2 = require('angular2/angular2');
 import ng2Helper = require('../ng2-library/ng2Helper');
 import rpc = require('../easy-rpc/index');
+import helper = require('../../share/helper')
 var echarts = require('echarts').echarts;
 
 var selectorName = 'pay-type-line';
@@ -145,6 +146,13 @@ class PayTypeLine implements IChart{
   }
 
   update(start,end){
+    rpc.call('money.getPayEventsByStartEndDayStr',{
+      start:helper.getThedayStrOfTheday(start),
+      end:helper.getThedayStrOfTheday(end)
+    },(data)=>{
+
+    
+    })
 
   }
 

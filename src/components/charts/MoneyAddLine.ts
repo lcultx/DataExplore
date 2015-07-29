@@ -106,12 +106,12 @@ class MoneyAddLine implements IChart{
   }
 
   update(start:moment.Moment,end:moment.Moment){
-    console.log(start,end);
+
     rpc.call('money.getPayEventsByStartEndDayStr',{
       start:helper.getThedayStrOfTheday(start),
       end:helper.getThedayStrOfTheday(end)
     },(data)=>{
-      console.log(data);
+
       var option = $.extend(true,{},this.option);
       //var option = this.option;
       var dayStrArray = data.dayStrArray;
