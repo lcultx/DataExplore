@@ -3,6 +3,7 @@
 
 
 import {Component, Directive, View, Parent} from 'angular2/angular2';
+import angular2 = require('angular2/angular2');
 import ng2Helper = require('../ng2-library/ng2Helper');
 import rpc = require('../easy-rpc/index');
 var echarts = require('echarts').echarts;
@@ -37,7 +38,7 @@ var selectorName = 'pay-type-line';
   directives: []
 })
 
-class PayTypeLine {
+class PayTypeLine implements IChart{
 
   option = {
 
@@ -98,7 +99,12 @@ class PayTypeLine {
       ]
   };
 
-  constructor(){
+
+  parent:IChartContainer;
+
+  constructor(viewContrainer:angular2.ViewContainerRef){
+    this.parent = ng2Helper.getParentFromViewContainer(viewContrainer);
+    this.parent.addChart(this);
     rpc.call('money.getYesterdayPayStatusWithType',{},(data)=>{
       var android_chart_config = $.extend(true,{},this.option);
       var ios_chart_config = $.extend(true,{},this.option);
@@ -136,6 +142,10 @@ class PayTypeLine {
       echarts.init($ios_chart[0]).setOption(ios_chart_config);
 
     });
+  }
+
+  update(start,end){
+
   }
 
 }

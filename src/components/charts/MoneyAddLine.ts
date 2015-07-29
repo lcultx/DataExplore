@@ -3,6 +3,7 @@
 
 
 import {Component, Directive, View, Parent} from 'angular2/angular2';
+import angular2 = require('angular2/angular2');
 import ng2Helper = require('../ng2-library/ng2Helper');
 import rpc = require('../easy-rpc/index');
 var echarts = require('echarts').echarts;
@@ -22,7 +23,7 @@ var selectorName = 'money-add-line';
   directives: []
 })
 
-class MoneyAddLine {
+class MoneyAddLine implements IChart{
 
   option = {
 
@@ -64,7 +65,11 @@ class MoneyAddLine {
       ]
   };
 
-  constructor(){
+  parent:IChartContainer;
+
+  constructor(viewContrainer:angular2.ViewContainerRef){
+    this.parent = ng2Helper.getParentFromViewContainer(viewContrainer);
+    this.parent.addChart(this);
     rpc.call('money.getYesterdayPayStatusWithTimeline',{},(data)=>{
 
       for(var i=0;i<24;i++){
@@ -78,6 +83,10 @@ class MoneyAddLine {
 
       this.getChart().setOption(this.option);
     });
+  }
+
+  update(start:moment.Moment,end:moment.Moment){
+    console.log(start,end);
   }
 
   getChart(){

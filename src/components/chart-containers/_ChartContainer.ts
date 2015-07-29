@@ -1,7 +1,7 @@
 import EventEmitter = require('eventemitter3');
 class ChartContainer extends EventEmitter{
 
-  charts:Array<IChart>;
+  charts:Array<IChart> = new Array();
 
   datepicker:any;
 
@@ -12,9 +12,15 @@ class ChartContainer extends EventEmitter{
   setDatePicker(datepicker:any){
     this.datepicker = datepicker;
     this.datepicker.on('change',(data)=>{
-      this.emit('date-change',data);
-    })
+      console.log(data);
+      for(var i in this.charts){
+        var chart = this.charts[i];
+        console.log(chart);
+        chart.update(data.start,data.end);
+      }
+    });
   };
+
   getDatePicker(){
     return this.datepicker;
   };

@@ -4,6 +4,7 @@
 
 import {Component, Directive, View, Parent} from 'angular2/angular2';
 import ng2Helper = require('../ng2-library/ng2Helper');
+import angular2 = require('angular2/angular2');
 import rpc = require('../easy-rpc/index');
 var echarts = require('echarts').echarts;
 
@@ -22,7 +23,7 @@ var selectorName = 'yesterday-pay-chart';
   directives: []
 })
 
-class YesterdayPayChart {
+class YesterdayPayChart implements IChart{
 
   option = {
 
@@ -64,7 +65,11 @@ class YesterdayPayChart {
       ]
   };
 
-  constructor(){
+  parent:IChartContainer;
+
+  constructor(viewContrainer:angular2.ViewContainerRef){
+    this.parent = ng2Helper.getParentFromViewContainer(viewContrainer);
+    this.parent.addChart(this);
     rpc.call('money.getYesterdayPayStatusWithTimeline',{},(data)=>{
       for(var i=0;i<24;i++){
         this.option.xAxis[0].data.push(i);
@@ -83,6 +88,10 @@ class YesterdayPayChart {
       var $chart = $(selectorName).find('#chart');
       $chart.css({height:340});
       return echarts.init($chart[0]);
+  }
+
+  update(start,end){
+
   }
 }
 
