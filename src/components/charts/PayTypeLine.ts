@@ -6,7 +6,9 @@ import {Component, Directive, View, Parent} from 'angular2/angular2';
 import angular2 = require('angular2/angular2');
 import ng2Helper = require('../ng2-library/ng2Helper');
 import rpc = require('../easy-rpc/index');
-import helper = require('../../share/helper')
+import helper = require('../../share/helper');
+import querystring = require('querystring');
+import shuijing_config = require('../../share/configs/shuijing');
 var echarts = require('echarts').echarts;
 
 var selectorName = 'pay-type-line';
@@ -130,19 +132,53 @@ class PayTypeLine implements IChart{
         ios_chart_config.series[0].data.push(good.number);
       }
 
-      var $andorid_chart = $('<div>');
-      $andorid_chart.css({height:340});
-      $(selectorName).find('#chart1').html('');
-      $(selectorName).find('#chart1').append($andorid_chart);
-      echarts.init($andorid_chart[0]).setOption(android_chart_config);
-
-      var $ios_chart = $('<div>');
-      $ios_chart.css({height:340});
-      $(selectorName).find('#chart2').html('');
-      $(selectorName).find('#chart2').append($ios_chart);
-      echarts.init($ios_chart[0]).setOption(ios_chart_config);
+      this.getAndroidChart().setOption(android_chart_config);
+      this.getIOSChart().setOption(ios_chart_config);
 
     });
+  }
+
+
+  getAndroidChart(){
+    var $andorid_chart = $('<div>');
+    $andorid_chart.css({height:340});
+    $(selectorName).find('#chart1').html('');
+    $(selectorName).find('#chart1').append($andorid_chart);
+    return echarts.init($andorid_chart[0])
+  }
+
+  getIOSChart(){
+    var $ios_chart = $('<div>');
+    $ios_chart.css({height:340});
+    $(selectorName).find('#chart2').html('');
+    $(selectorName).find('#chart2').append($ios_chart);
+    return echarts.init($ios_chart[0])
+  }
+
+
+
+  prepareChartsOption(events){
+    var servers:any = {};
+    for(var i in events){
+      var ob = events[i];
+      var args = querystring.parse(ob.data.req);
+      var itemid = args.itemid;
+      var good = shuijing_config.getGoodByItemId(itemid);
+      if(!servers[good.zoneid]){
+        servers[good.zoneid]={};
+      }
+      if(servers[good.zoneid][good.itemid]){
+        servers[good.zoneid][good.itemid].number += 1;
+        servers[good.zoneid][good.itemid].money += good.price;
+      }else{
+        servers[good.zoneid][good.itemid] = {
+          number:1,
+          money:good.price,
+          name:good.desc
+        }
+      }
+    }
+    return servers;
   }
 
   update(start,end){
@@ -150,8 +186,30 @@ class PayTypeLine implements IChart{
       start:helper.getThedayStrOfTheday(start),
       end:helper.getThedayStrOfTheday(end)
     },(data)=>{
+      var servers = this.prepareChartsOption(data.events);
+      var android_chart_config = $.extend(true,{},this.option);
+      var ios_chart_config = $.extend(true,{},this.option);
+      android_chart_config.title.subtext = 'android';
+      ios_chart_config.title.subtext = 'ios';
+      var android_goods = servers[1];
+      for(var i in android_goods){
+        var good = android_goods[i];
 
-    
+        android_chart_config.xAxis[0].data.push(good.name);
+        android_chart_config.series[0].data.push(good.number);
+      }
+
+
+
+      var ios_goods = servers[2];
+      for(var i in ios_goods){
+        var good = ios_goods[i];
+        ios_chart_config.xAxis[0].data.push(good.name);
+        ios_chart_config.series[0].data.push(good.number);
+      }
+
+      this.getAndroidChart().setOption(android_chart_config);
+      this.getIOSChart().setOption(ios_chart_config);
     })
 
   }
