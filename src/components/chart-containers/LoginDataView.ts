@@ -1,5 +1,8 @@
 import {Component, Directive, View, Parent} from 'angular2/angular2';
 import ng2Helper = require('../ng2-library/ng2Helper');
+import ChartContainer = require('./_ChartContainer');
+import DatePicker = require('../datepicker/DatePicker');
+import UserAddLine = require('../charts/UserAddLine');
 
 @Component({
   selector: 'login-data-view'
@@ -7,10 +10,10 @@ import ng2Helper = require('../ng2-library/ng2Helper');
 
 @View({
   templateUrl: ng2Helper.getTemplateUrlByComponentPath('chart-containers/login-data-view'),
-  directives: []
+  directives: [DatePicker,UserAddLine]
 })
 
-class LoginDataView {
+class LoginDataView extends ChartContainer implements IChartContainer {
 
 }
 
