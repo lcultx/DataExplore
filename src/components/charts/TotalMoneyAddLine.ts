@@ -119,16 +119,21 @@ class TotalMoneyAddLine implements IChart{
       var andorid = 0;
       var ios = 0;
       for(var i in dayStrArray){
-        var theday_str = dayStrArray[i];
-        var theday = data.timeline[theday_str];
-        option.xAxis[0].data.push(theday_str.substring(5,theday_str.length));
+        try{
+          var theday_str = dayStrArray[i];
+          var theday = data.timeline[theday_str];
+          option.xAxis[0].data.push(theday_str.substring(5,theday_str.length));
 
-        total += theday.total/10;
-        option.series[0].data.push(total);
-        andorid += theday[1] /10;
-        option.series[1].data.push(andorid);
-        ios += theday[2]/10;
-        option.series[2].data.push(ios);
+          total += theday.total/10;
+          option.series[0].data.push(total);
+          andorid += theday[1] /10;
+          option.series[1].data.push(andorid);
+          ios += theday[2]/10;
+          option.series[2].data.push(ios);
+        }catch(e){
+          console.log('异常数据',dayStrArray[i]);
+        }
+
       };
 
 
