@@ -151,6 +151,47 @@ export function getPayEventsByStartEndDayStr(args,callback){
     });
   });
 
+}
 
+function caculateTotalMoneyAddTimeline(events,callback){
+  var dayStrArray = [];
+  var timeline = {};
 
+  for(var i in events){
+    var ob = events[i];
+    var url_parts = querystring.parse(ob.data.req);
+    var itemid = url_parts.itemid;
+    var good = shuijing.getGoodByItemId(url_parts.itemid);
+
+    var theday = timeline[ob.theday_str];
+    if(!theday){
+      dayStrArray.push(ob.theday_str);
+      timeline[ob.theday_str] =  {total:0};
+      theday = timeline[ob.theday_str];
+    }
+
+    theday.total += good.price;
+    if(theday[good.zoneid]){
+      theday[good.zoneid] += good.price;
+    }else{
+      theday[good.zoneid] = good.price;
+    }
+  }
+
+  callback({dayStrArray:dayStrArray,timeline:timeline});
+}
+
+export function getTotalMoneyAddTimeline(args,callback){
+  profiler.step('recvice request');
+  wanba_collection.find({
+    'data.req':/buy_playzone_item/,
+    'data.res.code':0
+  }).toArray((err,results)=>{
+    profiler.step('query finish');
+    caculateTotalMoneyAddTimeline(results,(data)=>{
+      profiler.step('caculate finish');
+      console.log(data);
+      callback(data);
+    })
+  });
 }

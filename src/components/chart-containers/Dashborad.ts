@@ -7,6 +7,7 @@ import ng2Helper = require('../ng2-library/ng2Helper');
 
 import DashboardStats = require('../dashboard-stats/DashboardStats');
 import YesterdayPayChart = require('../charts/YesterdayPayChart');
+import TotalMoneyAddLine = require('../charts/TotalMoneyAddLine');
 
 import DatePicker = require('../datepicker/DatePicker');
 
@@ -16,7 +17,7 @@ import DatePicker = require('../datepicker/DatePicker');
 
 @angular2.View({
   templateUrl: ng2Helper.getTemplateUrlByComponentPath('chart-containers/dashboard'),
-  directives: [DashboardStats,YesterdayPayChart,DatePicker]
+  directives: [DashboardStats,YesterdayPayChart,DatePicker,TotalMoneyAddLine]
 })
 
 class Dashboard extends ChartContainer implements IChartContainer{
