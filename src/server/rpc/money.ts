@@ -181,14 +181,20 @@ function caculateTotalMoneyAddTimeline(events,callback){
   callback({dayStrArray:dayStrArray,timeline:timeline});
 }
 
-export function getTotalMoneyAddTimeline(args,callback){
-  profiler.step('recvice request');
+export function getTotalPayEvents(args,callback){
   wanba_collection.find({
     'data.req':/buy_playzone_item/,
     'data.res.code':0
   }).toArray((err,results)=>{
+    callback(results);
+  });
+}
+
+export function getTotalMoneyAddTimeline(args,callback){
+  profiler.step('recvice request');
+  getTotalPayEvents(args,(events)=>{
     profiler.step('query finish');
-    caculateTotalMoneyAddTimeline(results,(data)=>{
+    caculateTotalMoneyAddTimeline(events,(data)=>{
       profiler.step('caculate finish');
       console.log(data);
       callback(data);

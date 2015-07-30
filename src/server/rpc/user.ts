@@ -4,6 +4,7 @@ import mogHelper = require('../lib/mogHelper');
 import moment = require('moment');
 var qzone_collection = mogHelper.getQZoneLogEventCollection();
 var rates_collection = mogHelper.getLeftRatesCollection();
+var actives_collection = mogHelper.getUserActiveCollection();
 
 import helper = require('../../share/helper');
 var ExecTime = require('exec-time');
@@ -13,6 +14,8 @@ profiler.beginProfiling();
 
 
 import async = require('async');
+import money = require('./money');
+import querystring = require('querystring');
 
 //收入/活跃用户数
 export function getARPU(){
@@ -132,6 +135,29 @@ function isActiveInTheday(user,theday,callback){
     }
   })
 }
+
+export function getActiveUserNumberOfThedaySlow(args,callback){
+  qzone_collection.distinct('player_name',{
+    theday_str:args.theday_str
+  },function(err, items) {
+    callback(items.length);
+  });
+}
+
+export function getActiveUserNumberOfTheday(args,callback){
+  actives_collection.findOne({theday_str:args.theday_str},(err,doc)=>{
+    if(doc){
+      callback(doc.active_number);
+    }else{
+      getActiveUserNumberOfThedaySlow(args,(number)=>{
+        actives_collection.insert({theday_str:args.theday_str,active_number:number},()=>{});
+        callback();
+      })
+
+    }
+  });
+}
+
 
 export function getLeastLeaveAndLeft(args,callback){
 
@@ -257,6 +283,54 @@ export function getUserLeaveTimelineByStartEndDayStr(args,callback){
   },()=>{
     callback({dayStrArray:dayStrArray,timeline:timeline});
   })
+}
+
+function caculatePayRateTimeline(events,callback){
+  var dayStrArray = [];
+  var timeline = {};
+
+  for(var i in events){
+    var ob = events[i];
+    var url_parts = querystring.parse(ob.data.req);
+    var openid = url_parts.openid;
+
+    var theday = timeline[ob.theday_str];
+    if(!theday){
+      dayStrArray.push(ob.theday_str);
+      timeline[ob.theday_str] =  {payIds:[]};
+      theday = timeline[ob.theday_str];
+    }
 
 
+    if(theday.payIds.indexOf(openid) == -1){
+      theday.payIds.push(openid);
+    }
+  }
+
+  callback({dayStrArray:dayStrArray,timeline:timeline});
+}
+
+export function getPayRateTimeline(args,callback){
+  money.getTotalPayEvents(args,(events)=>{
+    caculatePayRateTimeline(events,(data:any)=>{
+      var dayStrArray = data.dayStrArray.sort();
+      var timeline = {};
+      async.each(dayStrArray,(theday_str:string,complete)=>{
+        try{
+          var theday = data.timeline[theday_str];
+          var payUserNumber = theday.payIds.length;
+          getActiveUserNumberOfTheday({theday_str:theday_str},(activeUserNumber)=>{
+            var payRate = payUserNumber / activeUserNumber;
+            timeline[theday_str] = {payRate:payRate};
+            complete();
+          });
+        }catch(e){
+          console.log(e);
+          complete();
+        }
+      },()=>{
+        callback({dayStrArray:dayStrArray,timeline:timeline})
+      })
+    });
+  });
 }

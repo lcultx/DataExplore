@@ -25,6 +25,7 @@
         "./src/components/chart-containers/_ChartContainer.ts",
         "./src/components/chart-containers/interface.ts",
         "./src/components/charts/MoneyAddLine.ts",
+        "./src/components/charts/PayRateLine.ts",
         "./src/components/charts/PayTypeLine.ts",
         "./src/components/charts/TotalMoneyAddLine.ts",
         "./src/components/charts/UserAddLine.ts",
