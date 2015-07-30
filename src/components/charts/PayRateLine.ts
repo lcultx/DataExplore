@@ -113,10 +113,15 @@ class PayRateLine implements IChart{
       var dayStrArray = data.dayStrArray;
       var timeline = data.timeline;
       for(var i in dayStrArray){
-        var theday_str = dayStrArray[i];
-        var rate = timeline[theday_str].payRate;
-        option.xAxis[0].data.push(theday_str.substring(5,theday_str.length));
-        option.series[0].data.push(rate*10000);
+        try{
+          var theday_str = dayStrArray[i];
+          var rate = timeline[theday_str].payRate;
+          option.xAxis[0].data.push(theday_str.substring(5,theday_str.length));
+          option.series[0].data.push(rate*10000);
+        }catch(e){
+          console.log(e);
+        }
+
       }
 
       this.getChart().setOption(option);

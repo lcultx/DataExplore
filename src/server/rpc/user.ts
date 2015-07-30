@@ -137,9 +137,11 @@ function isActiveInTheday(user,theday,callback){
 }
 
 export function getActiveUserNumberOfThedaySlow(args,callback){
+  profiler.step('count active user of theday ' + args.theday_str);
   qzone_collection.distinct('player_name',{
     theday_str:args.theday_str
   },function(err, items) {
+    profiler.step('count active user of theday ' + args.theday_str + ' finish');
     callback(items.length);
   });
 }
