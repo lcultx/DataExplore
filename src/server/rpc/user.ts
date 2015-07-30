@@ -3,6 +3,7 @@ import mogHelper = require('../lib/mogHelper');
 
 import moment = require('moment');
 var qzone_collection = mogHelper.getQZoneLogEventCollection();
+var rates_collection = mogHelper.getLeftRatesCollection();
 
 import helper = require('../../share/helper');
 var ExecTime = require('exec-time');
@@ -135,28 +136,15 @@ function isActiveInTheday(user,theday,callback){
 export function getLeastLeaveAndLeft(args,callback){
 
   var today = moment();
-  var yesterday = today.clone().subtract(1,'d');
   var before_yesterday = today.clone().subtract(2,'d');
 
-  var leftNumber = 0;
-  getAddUsersOfTheDay({theday_str:helper.getThedayStrOfTheday(before_yesterday)},(users)=>{
-    profiler.step('query finish');
-    async.each(users,(user,complete)=>{
-      isActiveInTheday(user,yesterday,(isActive)=>{
-        if(isActive){
-          leftNumber ++;
-        }
-        complete();
-      })
-    },()=>{
-      profiler.step('check active finish');
-      callback(leftNumber/users.length || 0);
-    })
-  })
+  getDaysLeaveOfTheday({theday_str:helper.getThedayStrOfTheday(before_yesterday),days:1},(rate)=>{
+    callback(rate);
+  });
 
 }
 
-export function getDaysLeaveOfTheday(args,callback){
+export function getDaysLeaveOfThedaySlow(args,callback){
   var theday_str = args.theday_str;
   var days = args.days;
   var theday = moment(theday_str,'YYYY/MM/DD');
@@ -178,6 +166,30 @@ export function getDaysLeaveOfTheday(args,callback){
   })
 }
 
+export function getDaysLeaveOfTheday(args,callback){
+  var theday_str = args.theday_str;
+  var days = args.days;
+  rates_collection.findOne({
+    theday_str:theday_str,
+    days:days
+  },(err,doc)=>{
+    console.log(err,doc);
+    if(doc){
+      callback(doc.rate);
+    }else{
+      getDaysLeaveOfThedaySlow(args,(rate)=>{
+        callback(rate);
+        rates_collection.insert({
+          theday_str:theday_str,
+          days:days,
+          rate:rate
+        },(err)=>{
+          console.log(err);
+        })
+      })
+    }
+  })
+}
 
 
 
