@@ -156,6 +156,32 @@ export function getLeastLeaveAndLeft(args,callback){
 
 }
 
+export function getDaysLeaveOfTheday(args,callback){
+  var theday_str = args.theday_str;
+  var days = args.days;
+  var theday = moment(theday_str,'YYYY/MM/DD');
+  var thatday = theday.add(days,'d');
+  var leftNumber = 0;
+  getAddUsersOfTheDay({theday_str:theday_str},(users)=>{
+    profiler.step('query finish');
+    async.each(users,(user,complete)=>{
+      isActiveInTheday(user,thatday,(isActive)=>{
+        if(isActive){
+          leftNumber ++;
+        }
+        complete();
+      })
+    },()=>{
+      profiler.step('check active finish');
+      callback(leftNumber/users.length || 0);
+    })
+  })
+}
+
+
+
+
+
 export function getUserAddTimelineByStartEndDayStr(args,callback){
   profiler.step('recvice request');
   var startday_str = args.start;
@@ -186,5 +212,39 @@ export function getUserAddTimelineByStartEndDayStr(args,callback){
       callback({dayStrArray:dayStrArray,timeline:timeline});
     })
   }
+
+}
+
+export function getUserLeaveTimelineByStartEndDayStr(args,callback){
+  profiler.step('recvice request');
+  var startday_str = args.start;
+  var endday_str = args.end;
+
+  var dayStrArray = [];
+  var startday = moment(startday_str,'YYYY/MM/DD');
+  var endday = moment(endday_str,'YYYY/MM/DD');
+  for(var theday=startday.clone();theday.format('YYYY/MM/DD')!=endday_str;theday = theday.clone().add(1,'d')){
+    dayStrArray.push(theday.format('YYYY/MM/DD'));
+  }
+  dayStrArray.push(endday_str);
+
+  profiler.step('get dayStrArray');
+  var timeline = {};
+  async.each(dayStrArray,(theday_str,complete)=>{
+    var leaves = {};
+    var daysArray = [1,3,7,15,30];
+    async.each(daysArray,(days,cb)=>{
+      getDaysLeaveOfTheday({theday_str:theday_str,days:days},(rate)=>{
+        leaves[days] = rate;
+        cb();
+      })
+    },()=>{
+      timeline[theday_str] = leaves;
+      complete();
+    })
+  },()=>{
+    callback({dayStrArray:dayStrArray,timeline:timeline});
+  })
+
 
 }
