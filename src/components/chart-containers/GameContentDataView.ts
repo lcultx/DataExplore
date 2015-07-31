@@ -2,8 +2,7 @@ import {Component, Directive, View, Parent} from 'angular2/angular2';
 import ng2Helper = require('../ng2-library/ng2Helper');
 import ChartContainer = require('./_ChartContainer');
 import DatePicker = require('../datepicker/DatePicker');
-import UserAddLine = require('../charts/UserAddLine');
-import UserLeaveLine = require('../charts/UserLeaveLine');
+import HeroAddLine = require('../charts/HeroAddLine');
 
 @Component({
   selector: 'game-content-data-view'
@@ -11,7 +10,7 @@ import UserLeaveLine = require('../charts/UserLeaveLine');
 
 @View({
   templateUrl: ng2Helper.getTemplateUrlByComponentPath('chart-containers/game-content-data-view'),
-  directives: [DatePicker,UserAddLine,UserLeaveLine]
+  directives: [DatePicker,HeroAddLine]
 })
 
 class GameContentDataView extends ChartContainer implements IChartContainer {
