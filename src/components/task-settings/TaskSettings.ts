@@ -19,6 +19,14 @@ class TaskSettings {
       console.log('settings');
 
     }
+
+    addTask(){
+      console.log('add Task');
+      var modalManager = $("body").data("modalmanager");
+      var openModals = modalManager.getOpenModals();
+      var m = openModals[0];
+      m.destroy()
+    }
 }
 
 export = TaskSettings;
