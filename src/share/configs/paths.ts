@@ -4,7 +4,8 @@ var config = {
   LoginDataView:'/login-data',
   PayDataView:'/pay-data',
   FireDataView:'/fire-data',
-  GameContentDataView:'/game-content'
+  GameContentDataView:'/game-content',
+  Settings:'/settings'
 };
 
 var barItemConfig = [
@@ -15,6 +16,7 @@ var barItemConfig = [
   ,{title:'VIP等级数据',icon:'icon-star'}
   ,{title:'玩家等级数据',icon:'icon-filter'}
   ,{title:'游戏内容数据',link:'/game-content',icon:'icon-gamepad'}
+  ,{title:'系统设置',link:'/settings',icon:'icon-cogs'}
 ]
 
 

@@ -7,6 +7,7 @@ import LoginDataView = require('../chart-containers/LoginDataView');
 import PayDataView = require('../chart-containers/PayDataView');
 import FireDataView = require('../chart-containers/FireDataView');
 import GameContentDataView = require('../chart-containers/GameContentDataView');
+import Settings = require('../settings/Settings');
 
 import paths = require('../../share/configs/paths');
 
@@ -27,7 +28,7 @@ class Siderbar {
 
   constructor(router:router2.Router){
     this.router = router;
-    var componentsList = [Dashboard,LoginDataView,PayDataView,FireDataView,GameContentDataView];
+    var componentsList = [Dashboard,LoginDataView,PayDataView,FireDataView,GameContentDataView,Settings];
     this.router.config(paths.getNG2RouterConfig(componentsList));
     var barItems = paths.getSiderbarItemsConfig();
     var path = location.pathname;
