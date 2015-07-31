@@ -5,8 +5,11 @@ import router2 = require('angular2/router');
 import Dashboard = require('../chart-containers/Dashborad');
 import LoginDataView = require('../chart-containers/LoginDataView');
 import PayDataView = require('../chart-containers/PayDataView');
+import FireDataView = require('../chart-containers/FireDataView');
+import GameContentDataView = require('../chart-containers/GameContentDataView');
 
- 
+import paths = require('../../share/configs/paths');
+
 @Component({
   selector: 'siderbar'
 })
@@ -21,43 +24,13 @@ class Siderbar {
   barItems:any = [];
   nowActiveIndex:number = 0;
 
+
   constructor(router:router2.Router){
     this.router = router;
-    this.router.config([
-         {path:'/', component: Dashboard}
-        ,{path:'/login-data',component:LoginDataView, as:'login-data'}
-        ,{path:'/pay-data',component:PayDataView,as:'pay-data'}
-    ]);
+    var componentsList = [Dashboard,LoginDataView,PayDataView,FireDataView,GameContentDataView];
+    this.router.config(paths.getNG2RouterConfig(componentsList));
 
-    this.barItems = [
-      {
-        title:'Dashboard',
-        link:"",
-        icon:'icon-home',
-        active:false
-      },{
-        title:'登录数据',
-        link:"/login-data",
-        icon:'icon-user',
-        active:true
-      },{
-        title:'付费数据',
-        link:"/pay-data",
-        icon:'icon-file-text'
-      },{
-        title:'消耗数据',
-        icon:'icon-fire'
-      },{
-        title:'VIP等级数据',
-        icon:'icon-star'
-      },{
-        title:'玩家等级数据',
-        icon:'icon-filter'
-      },{
-        title:'游戏内容数据',
-        icon:'icon-gamepad'
-      }
-    ];
+    this.barItems = paths.getSiderbarItemsConfig();
   }
 
   getClassOfItem(item,i:number){

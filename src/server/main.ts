@@ -3,7 +3,7 @@ import path = require('path');
 import config = require('./config');
 import rpcRegister = require('../components/easy-rpc/register');
 import mogHelper = require('./lib/mogHelper');
-var router_config = config.routers;
+import paths = require('../share/configs/paths');
 
 var app = express();
 
@@ -13,9 +13,9 @@ var web_path = path.join(__dirname,'../../');
 console.log(web_path);
 
 var index = path.join(web_path,'index.html');
-for(var i in router_config){
-  var router = router_config[i];
-  app.get(router.path,(req,res)=>{
+var index_paths = paths.getExpressIndexPaths();
+for(var i in index_paths){
+  app.get(index_paths[i],(req,res)=>{
     res.sendFile(index);
   })
 }
