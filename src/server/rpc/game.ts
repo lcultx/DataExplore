@@ -10,16 +10,20 @@ profiler.beginProfiling();
 var economy_collection = mogHelper.getEconomyLogCollection();
 
 
-function getHeroAddNumberOfTheday(args,callback){
+function getEventAddNumberOfTheday(args,callback){
+  profiler.step('query ' + JSON.stringify(args));
   economy_collection.count({
     theday_str:args.theday_str,
-    player_action:'添加英雄'
+    player_action:args.player_action
   },(err,number)=>{
+    profiler.step('query ' + JSON.stringify(args) + ' finish!');
     callback(number);
   });
 }
 
-export function getHeroAddTimelineByStartEndDayStr(args,callback){
+
+
+export function getEventAddTimelineByStartEndDayStr(args,callback){
   profiler.step('recvice request');
   var startday_str = args.start;
   var endday_str = args.end;
@@ -33,8 +37,9 @@ export function getHeroAddTimelineByStartEndDayStr(args,callback){
   dayStrArray.push(endday_str);
   var timeline = {};
   async.each(dayStrArray,(theday_str,complete)=>{
-    getHeroAddNumberOfTheday({
-      theday_str:theday_str
+    getEventAddNumberOfTheday({
+      theday_str:theday_str,
+      player_action:args.player_action
     },(number)=>{
       timeline[theday_str] = {
         total:number

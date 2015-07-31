@@ -26,7 +26,7 @@
         "./src/components/chart-containers/PayDataView.ts",
         "./src/components/chart-containers/_ChartContainer.ts",
         "./src/components/chart-containers/interface.ts",
-        "./src/components/charts/HeroAddLine.ts",
+        "./src/components/charts/EventAddLine.ts",
         "./src/components/charts/MoneyAddLine.ts",
         "./src/components/charts/PayRateLine.ts",
         "./src/components/charts/PayTypeLine.ts",

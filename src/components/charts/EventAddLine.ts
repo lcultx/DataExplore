@@ -11,7 +11,7 @@ import querystring = require('querystring');
 import shuijing_config = require('../../share/configs/shuijing');
 var echarts = require('echarts').echarts;
 
-var selectorName = 'hero-add-line';
+var selectorName = 'event-add-line';
 
 @Component({
   selector: selectorName
@@ -26,12 +26,12 @@ var selectorName = 'hero-add-line';
   directives: []
 })
 
-class HeroAddLine implements IChart{
+class EventAddLine implements IChart{
 
   option = {
 
       title : {
-          text: '召唤次数',
+          text: '',
           subtext: ''
       },
       tooltip : {
@@ -80,21 +80,31 @@ class HeroAddLine implements IChart{
   };
 
   parent:IChartContainer;
+  $this:JQuery;
+  eventName:string;
 
   constructor(viewContrainer:angular2.ViewContainerRef){
     this.parent = ng2Helper.getParentFromViewContainer(viewContrainer);
+    this.$this = ng2Helper.getJQueryElementFromViewContainer(viewContrainer);
+    console.log(viewContrainer);
+    this.eventName = viewContrainer.element.nativeElement.attributes.eventName.value;
     this.parent.addChart(this);
     this.update(moment().subtract(1,'d'),moment().subtract(1,'d'));
   }
 
   update(start?:moment.Moment,end?:moment.Moment){
 
-    rpc.call('game.getHeroAddTimelineByStartEndDayStr',{
+
+    console.log(this.eventName);
+
+    rpc.call('game.getEventAddTimelineByStartEndDayStr',{
       start:helper.getThedayStrOfTheday(start),
-      end:helper.getThedayStrOfTheday(end)
+      end:helper.getThedayStrOfTheday(end),
+      player_action:this.eventName
     },(data)=>{
 
       var option = $.extend(true,{},this.option);
+      option.title.text = this.eventName;
       //var option = this.option;
       var dayStrArray = data.dayStrArray;
       var timeline = data.timeline;
@@ -110,10 +120,10 @@ class HeroAddLine implements IChart{
   }
 
   getChart(){
-      var $chart = $(selectorName).find('#chart');
+      var $chart = this.$this.find('#chart');
       $chart.css({height:340});
       return echarts.init($chart[0]);
   }
 }
 
-export = HeroAddLine;
+export = EventAddLine;
