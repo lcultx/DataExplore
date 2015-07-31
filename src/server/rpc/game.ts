@@ -12,7 +12,7 @@ var economy_collection = mogHelper.getEconomyLogCollection();
 
 function getHeroAddNumberOfTheday(args,callback){
   economy_collection.count({
-    thday_str:args.theday_str,
+    theday_str:args.theday_str,
     player_action:'添加英雄'
   },(err,number)=>{
     callback(number);
