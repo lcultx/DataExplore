@@ -8,9 +8,11 @@ var profiler =  new ExecTime('game');
 profiler.beginProfiling();
 
 var economy_collection = mogHelper.getEconomyLogCollection();
+var event_collection = mogHelper.getGameEventCountCollection();
 
 
-function getEventAddNumberOfTheday(args,callback){
+
+function getEventAddNumberOfThedaySlow(args,callback){
   profiler.step('query ' + JSON.stringify(args));
   economy_collection.count({
     theday_str:args.theday_str,
@@ -21,6 +23,27 @@ function getEventAddNumberOfTheday(args,callback){
   });
 }
 
+
+function getEventAddNumberOfTheday(args,callback){
+  event_collection.findOne({
+    theday_str:args.theday_str,
+    player_action:args.player_action
+  },function(err,doc:any){
+
+    if(doc){
+      callback(doc.number);
+    }else{
+      getEventAddNumberOfThedaySlow(args,function(number){
+        event_collection.insert({
+          theday_str:args.theday_str,
+          player_action:args.player_action,
+          number:number
+        },()=>{});
+        callback(number);
+      });
+    }
+  })
+}
 
 
 export function getEventAddTimelineByStartEndDayStr(args,callback){

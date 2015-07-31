@@ -6,6 +6,8 @@ var qzoneCollection:mongodb.Collection;
 var economyCollection:mongodb.Collection;
 var leftRatesCollection:mongodb.Collection;
 var userActivesCollection:mongodb.Collection;
+var gameEventCountsCollection:mongodb.Collection;
+
 export function getWanbaLogEventCollection():mongodb.Collection{
   return wanbaCollection;
 }
@@ -26,6 +28,10 @@ export function getUserActiveCollection():mongodb.Collection{
   return userActivesCollection;
 }
 
+export function getGameEventCountCollection():mongodb.Collection{
+  return gameEventCountsCollection;
+}
+
 
 export function init(callback:()=>void){
   var MongoClient = mongodb.MongoClient;
@@ -35,6 +41,7 @@ export function init(callback:()=>void){
     economyCollection = db.collection('ecomony_log_events');
     leftRatesCollection = db.collection('user_left_rates');
     userActivesCollection = db.collection('user_actives');
+    gameEventCountsCollection = db.collection('game_event_counts');
     callback();
   });
 }

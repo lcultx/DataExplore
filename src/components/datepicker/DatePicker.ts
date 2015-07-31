@@ -61,7 +61,7 @@ class Datepicker extends EventEmitter{
               format: 'YYYY/MM/DD'
           },
           ranges: {
-              'Today': [moment(), moment()],
+            //  'Today': [moment(), moment()],
              'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
              'Last 7 Days': [moment().subtract(7, 'days'),moment().subtract(1, 'days')],
              'Last 30 Days': [moment().subtract(30, 'days'), moment().subtract(1, 'days')],
