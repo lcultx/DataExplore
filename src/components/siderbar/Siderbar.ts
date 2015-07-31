@@ -29,12 +29,21 @@ class Siderbar {
     this.router = router;
     var componentsList = [Dashboard,LoginDataView,PayDataView,FireDataView,GameContentDataView];
     this.router.config(paths.getNG2RouterConfig(componentsList));
-
-    this.barItems = paths.getSiderbarItemsConfig();
+    var barItems = paths.getSiderbarItemsConfig();
+    var path = location.pathname;
+    for(var i in barItems){
+      var item:any = barItems[i];
+      if(path ==  item.link){
+        item.active = true;
+        this.nowActiveIndex = i;
+      }else{
+        item.active = false;
+      }
+    }
+    this.barItems = barItems;
   }
 
   getClassOfItem(item,i:number){
-
     if(item.active){
       this.nowActiveIndex = i;
       return 'active';
@@ -50,10 +59,8 @@ class Siderbar {
   onItemClick(i:number){
     this.barItems[this.nowActiveIndex].active = false;
     this.nowActiveIndex = i;
-    console.log(this.router);
     this.barItems[this.nowActiveIndex].active = true;
     var url = this.barItems[i].link || '';
-    console.log(url);
     this.router.navigate(url).then(()=>{
       console.log('finish!');
     });
