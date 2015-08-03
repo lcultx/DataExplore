@@ -60,6 +60,7 @@
         "./src/server/rpc/event.ts",
         "./src/server/rpc/game.ts",
         "./src/server/rpc/money.ts",
+        "./src/server/rpc/task.ts",
         "./src/server/rpc/user.ts",
         "./src/server/tasks/Downloader.ts",
         "./src/server/tasks/EconomyLogsImport.ts",

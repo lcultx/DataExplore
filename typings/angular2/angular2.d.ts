@@ -38,10 +38,9 @@ declare module "angular2/router"{
   var RouterOutlet:any;
   var RouterLink:any;
   class Router{
-    
+
   }
 }
-
 
 declare module "angular2/angular2" {
   class ProtoRecord {
